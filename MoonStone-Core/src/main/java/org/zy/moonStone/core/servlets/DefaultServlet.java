@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.UnavailableException;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
@@ -224,6 +225,45 @@ public class DefaultServlet extends HttpServlet {
 	private void initServletMapping() {
 		ServletMapping headImg = new ServletMapping("/head.jpg", true);
 		servletStaticResourceMapping.put("/head.jpg", headImg);
+		
+		//--
+		ServletMapping cookies = new ServletMapping("/cookies", true);
+		servletStaticResourceMapping.put("/cookies", cookies);
+		cookies.setPostCallback(new HttpServletServicePostCallback() {
+			@Override
+			public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+				Cookie[] cookiesObj = req.getCookies();
+				for (Cookie cookie : cookiesObj) {
+					System.out.println("====");
+					String cookieName = cookie.getName();
+					String value = cookie.getValue();
+					String domain = cookie.getDomain();
+					int maxAge = cookie.getMaxAge();
+					String path = cookie.getPath();
+					boolean secure = cookie.getSecure();
+					int version = cookie.getVersion();
+					String comment = cookie.getComment();
+
+					System.out.println("cookieName：" + cookieName);
+					System.out.println("value：" + value);
+					System.out.println("domain：" + domain);
+					System.out.println("maxAge：" + maxAge);
+					System.out.println("path：" + path);
+					System.out.println("secure：" + secure);
+					System.out.println("version：" + version);
+					System.out.println("comment：" + comment);
+					System.out.println("====");
+				}
+
+				Cookie cookie = new Cookie("MYSELFCOOKIE", "123456789");
+				cookie.setMaxAge(60 * 60 * 24); // 一天后过期
+				cookie.setPath("/"); // 在这个路径下面的页面才可以访问该Cookie
+				cookie.setHttpOnly(false);  // 如果设置了"HttpOnly"属性，那么通过程序(JS脚本、Applet等)将无法访问该Cookie
+				resp.addCookie(cookie);
+
+				resp.getWriter().print("[cookies] Running -  Self Cookie Add");				
+			}
+		});
 		
 		//--
 		ServletMapping fileUpload = new ServletMapping("/fileUpload", true);

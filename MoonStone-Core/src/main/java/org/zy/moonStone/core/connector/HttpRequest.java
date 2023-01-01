@@ -93,7 +93,7 @@ public class HttpRequest implements HttpServletRequest {
     protected Request request;
     
     /** 与此请求关联的 cookie 集 */
-    protected Cookie[] cookies = null;
+    protected Cookie[] cookies = new Cookie[0];
     
     /** 默认语言环境 */
     protected static final Locale defaultLocale = Locale.getDefault();
