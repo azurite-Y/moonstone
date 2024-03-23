@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.container.valves;
+package org.zy.moonstone.core.container.valves;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,13 +11,13 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
-import org.zy.moonStone.core.connector.HttpRequest;
-import org.zy.moonStone.core.connector.HttpResponse;
-import org.zy.moonStone.core.util.ErrorPageSupport;
-import org.zy.moonStone.core.util.ExceptionUtils;
-import org.zy.moonStone.core.util.IOTools;
-import org.zy.moonStone.core.util.descriptor.ErrorPage;
-import org.zy.moonStone.core.util.http.ActionCode;
+import org.zy.moonstone.core.connector.HttpRequest;
+import org.zy.moonstone.core.connector.HttpResponse;
+import org.zy.moonstone.core.util.ErrorPageSupport;
+import org.zy.moonstone.core.util.ExceptionUtils;
+import org.zy.moonstone.core.util.IOTools;
+import org.zy.moonstone.core.util.descriptor.ErrorPage;
+import org.zy.moonstone.core.util.http.ActionCode;
 
 /**
  * @dateTime 2022年1月5日;
@@ -128,7 +128,7 @@ public class ErrorReportValve extends ValveBase {
 			file = new File(getContainer().getMoonBase(), location);
 		}
 		if (!file.isFile() || !file.canRead()) {
-			getContainer().getLogger().warn("错误页面未找到", location);
+			getContainer().getLogger().warn("错误页面未找到. By location: {}", location);
 			return false;
 		}
 

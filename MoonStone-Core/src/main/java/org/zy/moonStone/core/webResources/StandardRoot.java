@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.webResources;
+package org.zy.moonstone.core.webResources;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,20 +19,20 @@ import java.util.jar.Manifest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.LifecycleBase;
-import org.zy.moonStone.core.LifecycleState;
-import org.zy.moonStone.core.exceptions.LifecycleException;
-import org.zy.moonStone.core.interfaces.container.Context;
-import org.zy.moonStone.core.interfaces.container.Host;
-import org.zy.moonStone.core.interfaces.container.Lifecycle;
-import org.zy.moonStone.core.interfaces.webResources.TrackedWebResource;
-import org.zy.moonStone.core.interfaces.webResources.WebResource;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceRoot;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceSet;
-import org.zy.moonStone.core.loaer.WebappClassLoaderBase;
-import org.zy.moonStone.core.util.RequestUtil;
-import org.zy.moonStone.core.util.buf.UriUtil;
-import org.zy.moonStone.core.util.compat.JreCompat;
+import org.zy.moonstone.core.LifecycleBase;
+import org.zy.moonstone.core.LifecycleState;
+import org.zy.moonstone.core.exceptions.LifecycleException;
+import org.zy.moonstone.core.interfaces.container.Context;
+import org.zy.moonstone.core.interfaces.container.Host;
+import org.zy.moonstone.core.interfaces.container.Lifecycle;
+import org.zy.moonstone.core.interfaces.webResources.TrackedWebResource;
+import org.zy.moonstone.core.interfaces.webResources.WebResource;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceRoot;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceSet;
+import org.zy.moonstone.core.loaer.WebappClassLoaderBase;
+import org.zy.moonstone.core.util.RequestUtil;
+import org.zy.moonstone.core.util.buf.UriUtil;
+import org.zy.moonstone.core.util.compat.JreCompat;
 
 /**
  * @dateTime 2022年4月12日;
@@ -437,7 +437,7 @@ public class StandardRoot extends LifecycleBase implements WebResourceRoot {
 	protected void registerURLStreamHandlerFactory() {
         if (!JreCompat.isGraalAvailable()) {
             // 确保对 jar;war;file;/ URL的支持将可用(打包的WAR文件中的资源JAR需要)
-            MoonStoneURLStreamHandlerFactory.register();
+            MoonstoneURLStreamHandlerFactory.register();
         }
     }
 

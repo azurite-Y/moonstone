@@ -1,9 +1,9 @@
-package org.zy.moonStone.core.interfaces.container;
+package org.zy.moonstone.core.interfaces.container;
 
 import java.io.File;
 
 import org.slf4j.Logger;
-import org.zy.moonStone.core.interfaces.Cluster;
+import org.zy.moonstone.core.interfaces.Cluster;
 
 /**
  * @dateTime 2021年12月29日;
@@ -19,13 +19,13 @@ import org.zy.moonStone.core.interfaces.Cluster;
  * <li>Context	 - —单个ServletContext的表示，它通常包含一个或多个被支持的servlet的包装器。
  * <li>Wrapper - 单个servlet定义的表示(如果servlet本身实现了SingleThreadModel，则可能支持多个servlet实例)。
  * </ul>
- * 一个给定的 MoonStone 部署不需要包含上述所有级别的容器。
+ * 一个给定的 moonstone 部署不需要包含上述所有级别的容器。
  * 例如，嵌入在网络设备(如路由器)中的管理应用程序可能只包含一个Context和几个Wrapper，如果应用程序相对较小，甚至可能只包含一个Wrapper。
  * 因此，容器的实现需要被设计成在给定部署中没有父容器的情况下能够正确操作。
  * <p>
  * 一个容器也可以与许多支持组件相关联，这些支持组件提供的功能可以被共享(通过将其附加到父容器)或单独定制。以下支持组件目前已被认可:
  * <ul>
- * <li>Loader - 类加载器，用于将新的Java类集成到运行 MoonStone 的JVM中
+ * <li>Loader - 类加载器，用于将新的Java类集成到运行 moonstone 的JVM中
  * <li>Logger - 实现了 ServletContext 接口的log()方法签名
  * <li>Manager - 与该容器关联的会话池的Manager
  * </ul>

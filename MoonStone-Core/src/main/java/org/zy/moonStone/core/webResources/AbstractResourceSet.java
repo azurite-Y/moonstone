@@ -1,12 +1,12 @@
-package org.zy.moonStone.core.webResources;
+package org.zy.moonstone.core.webResources;
 
 import java.util.jar.Manifest;
 
-import org.zy.moonStone.core.LifecycleBase;
-import org.zy.moonStone.core.LifecycleState;
-import org.zy.moonStone.core.exceptions.LifecycleException;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceRoot;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceSet;
+import org.zy.moonstone.core.LifecycleBase;
+import org.zy.moonstone.core.LifecycleState;
+import org.zy.moonstone.core.exceptions.LifecycleException;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceRoot;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceSet;
 
 /**
  * @dateTime 2022年8月25日;

@@ -1,7 +1,7 @@
-package org.zy.moonStone.core.util;
+package org.zy.moonstone.core.util;
 
 
-import org.zy.moonStone.core.interfaces.InstanceManager;
+import org.zy.moonstone.core.interfaces.InstanceManager;
 
 /**
  * @dateTime 2022年2月22日;

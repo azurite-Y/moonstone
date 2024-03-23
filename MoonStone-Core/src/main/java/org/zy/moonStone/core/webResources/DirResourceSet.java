@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.webResources;
+package org.zy.moonstone.core.webResources;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,12 +11,12 @@ import java.util.jar.Manifest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.exceptions.LifecycleException;
-import org.zy.moonStone.core.interfaces.webResources.WebResource;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceRoot;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceRoot.ResourceSetType;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceSet;
-import org.zy.moonStone.core.util.ResourceSet;
+import org.zy.moonstone.core.exceptions.LifecycleException;
+import org.zy.moonstone.core.interfaces.webResources.WebResource;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceRoot;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceRoot.ResourceSetType;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceSet;
+import org.zy.moonstone.core.util.ResourceSet;
 
 /**
  * @dateTime 2022年8月26日;

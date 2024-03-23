@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.webResources;
+package org.zy.moonstone.core.webResources;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -9,8 +9,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.interfaces.webResources.WebResource;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceRoot;
+import org.zy.moonstone.core.interfaces.webResources.WebResource;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceRoot;
 
 /**
  * @dateTime 2022年9月16日;
@@ -193,7 +193,6 @@ public class WebResourceCache {
      * 验证是否已核查指定路径的 {@link WebResource } 实例
      * 
      * @param path - web 应用程序根目录的相对路径
-     * @param useClassLoaderResources - 是否应仅用于类加载器资源查找
      * @return true 则代表已缓存
      */
     private boolean noCache(String path) {

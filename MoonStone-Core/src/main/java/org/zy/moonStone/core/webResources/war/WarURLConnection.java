@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.webResources.war;
+package org.zy.moonstone.core.webResources.war;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,7 +6,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.security.Permission;
 
-import org.zy.moonStone.core.util.buf.UriUtil;
+import org.zy.moonstone.core.util.buf.UriUtil;
 
 /**
  * @dateTime 2022年9月5日;

@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.util.buf;
+package org.zy.moonstone.core.util.buf;
 
 import java.io.Serializable;
 

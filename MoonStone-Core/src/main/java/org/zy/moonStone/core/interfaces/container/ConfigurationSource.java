@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.interfaces.container;
+package org.zy.moonstone.core.interfaces.container;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +13,7 @@ import java.net.URLConnection;
 /**
  * @dateTime 2022年12月4日;
  * @author zy(azurite-Y);
- * @description 抽象配置文件存储。允许使用常规配置样式嵌入 MoonStone。这种抽象旨在非常简单，不包括资源列表，资源列表通常用于动态部署（通常在嵌入时不使用）以及资源写入。
+ * @description 抽象配置文件存储。允许使用常规配置样式嵌入 moonstone。这种抽象旨在非常简单，不包括资源列表，资源列表通常用于动态部署（通常在嵌入时不使用）以及资源写入。
  */
 public interface ConfigurationSource {
 	public static final ConfigurationSource DEFAULT = new ConfigurationSource() {

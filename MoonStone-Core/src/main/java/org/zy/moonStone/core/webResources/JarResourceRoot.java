@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.webResources;
+package org.zy.moonstone.core.webResources;
 
 import java.io.File;
 import java.io.InputStream;
@@ -9,7 +9,7 @@ import java.util.jar.Manifest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceRoot;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceRoot;
 
 /**
  * @dateTime 2022年8月30日;

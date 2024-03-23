@@ -1,6 +1,6 @@
-package org.zy.moonStone.core;
+package org.zy.moonstone.core;
 
-import org.zy.moonStone.core.util.buf.ByteChunk;
+import org.zy.moonstone.core.util.buf.ByteChunk;
 
 /**
  * @dateTime 2022年6月9日;
@@ -140,34 +140,34 @@ public final class Constants {
     /**
      * 设置为布尔值的请求属性。如果处理此请求的连接器支持使用sendfile，则为 true
      */
-    public static final String SENDFILE_SUPPORTED_ATTR = "org.zy.moonStone.core.sendfile.support";
+    public static final String SENDFILE_SUPPORTED_ATTR = "org.zy.moonstone.core.sendfile.support";
 
     /**
      * ervlet可以使用的request属性，将sendfile要服务的文件的名称传递给连接器。
      * 值应为 {@code java.lang.String}，即要提供的文件的 {@code File.getCanonicalPath()}。
      */
-    public static final String SENDFILE_FILENAME_ATTR = "org.zy.moonStone.core.sendfile.filename";
+    public static final String SENDFILE_FILENAME_ATTR = "org.zy.moonstone.core.sendfile.filename";
 
 
     /**
      * servlet可以使用的请求属性，将sendfile要提供的文件部分的起始偏移量传递给连接器。该值应该是 {@code java.lang.Long} 。
      * 为了提供完整的文件，值应该是 {@code Long.valueOf(0)}。
      */
-    public static final String SENDFILE_FILE_START_ATTR = "org.zy.moonStone.core.sendfile.start";
+    public static final String SENDFILE_FILE_START_ATTR = "org.zy.moonstone.core.sendfile.start";
 
 
     /**
      * servlet可以使用的请求属性，将sendfile所服务的文件部分的结束偏移量（不包括）传递给连接器。该值应该是 {@code java.lang.Long}。
      * 为了提供完整的文件，该值应该等于文件的长度。
      */
-    public static final String SENDFILE_FILE_END_ATTR = "org.zy.moonStone.core.sendfile.end";
+    public static final String SENDFILE_FILE_END_ATTR = "org.zy.moonstone.core.sendfile.end";
 
 
     /**
      * RemoteIpFilter、RemoteIpValve(可能由其他类似组件设置)设置的请求属性，当通过一个或多个代理接收请求时，该属性为连接器标识声称与此请求关联的远程IP地址。
      * 它通常通过X-Forwarded-For HTTP请求头提供。
      */
-    public static final String REMOTE_ADDR_ATTRIBUTE = "org.zy.moonStone.core.remoteAddr";
+    public static final String REMOTE_ADDR_ATTRIBUTE = "org.zy.moonstone.core.remoteAddr";
     
 
     /**

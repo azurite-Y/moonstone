@@ -1,4 +1,15 @@
-package org.zy.moonStone.core.http;
+package org.zy.moonstone.core.http;
+
+import org.slf4j.Logger;
+import org.zy.moonstone.core.Globals;
+import org.zy.moonstone.core.interfaces.connector.Adapter;
+import org.zy.moonstone.core.interfaces.connector.Processor;
+import org.zy.moonstone.core.interfaces.connector.ProtocolHandler;
+import org.zy.moonstone.core.interfaces.connector.UpgradeProtocol;
+import org.zy.moonstone.core.util.ExceptionUtils;
+import org.zy.moonstone.core.util.collections.SynchronizedStack;
+import org.zy.moonstone.core.util.net.*;
+import org.zy.moonstone.core.util.net.AbstractEndpoint.Handler;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -6,30 +17,9 @@ import java.nio.channels.SelectionKey;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
-
-import javax.xml.ws.Endpoint;
-
-import org.slf4j.Logger;
-import org.zy.moonStone.core.Globals;
-import org.zy.moonStone.core.interfaces.connector.Adapter;
-import org.zy.moonStone.core.interfaces.connector.Processor;
-import org.zy.moonStone.core.interfaces.connector.ProtocolHandler;
-import org.zy.moonStone.core.interfaces.connector.UpgradeProtocol;
-import org.zy.moonStone.core.util.ExceptionUtils;
-import org.zy.moonStone.core.util.collections.SynchronizedStack;
-import org.zy.moonStone.core.util.net.AbstractEndpoint;
-import org.zy.moonStone.core.util.net.AbstractEndpoint.Handler;
-import org.zy.moonStone.core.util.net.ContainerThreadMarker;
-import org.zy.moonStone.core.util.net.SocketEvent;
-import org.zy.moonStone.core.util.net.SocketWrapperBase;
 
 /**
  * @dateTime 2022年1月11日;
@@ -53,7 +43,7 @@ public abstract class AbstractProtocol<S> implements ProtocolHandler {
 
 	private Handler<S> handler;
 
-	private final Set<Processor> waitingProcessors = Collections.newSetFromMap(new ConcurrentHashMap<Processor, Boolean>());
+	private final Set<Processor> waitingProcessors = Collections.newSetFromMap(new ConcurrentHashMap<>());
 
 	/**
 	 * 处理调度超时的控制器
@@ -668,7 +658,7 @@ public abstract class AbstractProtocol<S> implements ProtocolHandler {
 
 
 		/**
-		 * 应由 {@link Endpoint } 用于在套接字关闭、错误等情况下释放资源。
+		 * 应由 {@link NioEndpoint } 用于在套接字关闭、错误等情况下释放资源。
 		 */
 		@Override
 		public void release(SocketWrapperBase<S> socketWrapper) {

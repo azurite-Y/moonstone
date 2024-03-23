@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.util.descriptor;
+package org.zy.moonstone.core.util.descriptor;
 
 import java.io.Serializable;
 

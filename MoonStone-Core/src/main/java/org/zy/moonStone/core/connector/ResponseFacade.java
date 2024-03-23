@@ -1,5 +1,11 @@
-package org.zy.moonStone.core.connector;
+package org.zy.moonstone.core.connector;
 
+import org.zy.moonstone.core.Globals;
+import org.zy.moonstone.core.security.SecurityUtil;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.AccessController;
@@ -10,13 +16,6 @@ import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 import java.util.function.Supplier;
-
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-
-import org.zy.moonStone.core.Globals;
-import org.zy.moonStone.core.security.SecurityUtil;
 
 /**
  * @dateTime 2022年6月29日;
@@ -36,7 +35,7 @@ public class ResponseFacade implements HttpServletResponse {
 	/**
 	 * 为指定的响应构造一个包装器
 	 *
-	 * @param response - 要包装的响应
+	 * @param httpResponse - 要包装的响应
 	 */
 	public ResponseFacade(HttpResponse httpResponse) {
 		if (httpResponse == null) {

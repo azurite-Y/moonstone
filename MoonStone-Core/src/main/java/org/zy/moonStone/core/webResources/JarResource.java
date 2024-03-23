@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.webResources;
+package org.zy.moonstone.core.webResources;
 
 import java.util.jar.JarEntry;
 

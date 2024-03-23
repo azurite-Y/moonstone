@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.util.compat;
+package org.zy.moonstone.core.util.compat;
 
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -17,8 +17,8 @@ public class JrePlatform {
 
 	static {
 		/*
-		 * Java API 的行为取决于底层平台且这些行为差异对 MoonStone 的影响。
-		 * 因此，MoonStone 需要能够确定它运行的平台以解决这些差异。
+		 * Java API 的行为取决于底层平台且这些行为差异对 moonstone 的影响。
+		 * 因此，moonstone 需要能够确定它运行的平台以解决这些差异。
 		 */
 
 		// 此检查源自 Apache Commons Lang 中的检查

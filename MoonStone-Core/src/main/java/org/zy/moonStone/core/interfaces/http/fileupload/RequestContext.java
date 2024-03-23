@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.interfaces.http.fileupload;
+package org.zy.moonstone.core.interfaces.http.fileupload;
 
 import java.util.function.Supplier;
 

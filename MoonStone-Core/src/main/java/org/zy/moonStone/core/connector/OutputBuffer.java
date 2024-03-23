@@ -1,18 +1,17 @@
-package org.zy.moonStone.core.connector;
+package org.zy.moonstone.core.connector;
 
+import org.zy.moonstone.core.exceptions.ClientAbortException;
+import org.zy.moonstone.core.exceptions.CloseNowException;
+import org.zy.moonstone.core.http.Response;
+import org.zy.moonstone.core.util.http.ActionCode;
+
+import javax.servlet.WriteListener;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
-
-import javax.servlet.WriteListener;
-import javax.servlet.http.HttpServletResponse;
-
-import org.zy.moonStone.core.exceptions.ClientAbortException;
-import org.zy.moonStone.core.exceptions.CloseNowException;
-import org.zy.moonStone.core.http.Response;
-import org.zy.moonStone.core.util.http.ActionCode;
 
 /**
  * @dateTime 2022年7月21日;
@@ -65,7 +64,6 @@ public class OutputBuffer extends Writer {
      * 创建具有指定初始大小的缓冲区
      *
      * @param size - 输出缓冲区尺寸
-     * @param useByteBuffer - 是否直接使用字节缓冲区。若为true则写入的数据将按字节存储
      */
     public OutputBuffer(int size) {
         this.defaultBufferSize = size;
@@ -303,7 +301,7 @@ public class OutputBuffer extends Writer {
     /**
      * 写入字符数组的一部分
      * 
-     * @param b - 源数据
+     * @param c - 源数据
      * @param off - 数据中的起始偏移量
      * @param len - 要写入的字节数
      * @throws IOException - 如果发生 I/O 错误
@@ -445,7 +443,7 @@ public class OutputBuffer extends Writer {
     
     /**
      * 缓冲区是否已满
-     * @param httpOutputBuffer
+     * @param buffer
      * @return true则代表缓冲区已满
      */
     private boolean isFull(Buffer buffer) {
@@ -454,7 +452,7 @@ public class OutputBuffer extends Writer {
 
     /**
      * 切换到读模式
-     * @param httpOutputBuffer
+     * @param buffer
      */
     private void toReadMode(Buffer buffer) {
         buffer.limit(buffer.position()).reset();
@@ -462,7 +460,7 @@ public class OutputBuffer extends Writer {
 
     /**
      * 切换到写模式
-     * @param httpOutputBuffer
+     * @param buffer
      */
     private void toWriteMode(Buffer buffer) {
         buffer.mark().position(buffer.limit()).limit(buffer.capacity());
@@ -481,7 +479,7 @@ public class OutputBuffer extends Writer {
 
     /**
      * 转移一个字符到字符缓冲区中
-     * @param b - 转移字符
+     * @param c - 转移字符
      * @param to - 转移字符缓冲区
      */
     private void transfer(char c, CharBuffer to) {

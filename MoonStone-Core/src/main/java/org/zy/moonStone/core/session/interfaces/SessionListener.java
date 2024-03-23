@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.session.interfaces;
+package org.zy.moonstone.core.session.interfaces;
 
 import java.util.EventListener;
 

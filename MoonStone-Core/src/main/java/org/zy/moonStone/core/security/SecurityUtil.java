@@ -1,5 +1,17 @@
-package org.zy.moonStone.core.security;
+package org.zy.moonstone.core.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.zy.moonstone.core.Globals;
+import org.zy.moonstone.core.util.ExceptionUtils;
+
+import javax.security.auth.Subject;
+import javax.servlet.Filter;
+import javax.servlet.Servlet;
+import javax.servlet.ServletException;
+import javax.servlet.UnavailableException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -9,19 +21,6 @@ import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import javax.security.auth.Subject;
-import javax.servlet.Filter;
-import javax.servlet.Servlet;
-import javax.servlet.ServletException;
-import javax.servlet.UnavailableException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.Globals;
-import org.zy.moonStone.core.util.ExceptionUtils;
 
 /**
  * @dateTime 2022年6月29日;
@@ -111,7 +110,7 @@ public final class SecurityUtil {
      * @param methodName - 应用安全限制的方法
      * @param targetObject - 该方法将被调用的Servlet
      * @param targetParameterTypes - 用于实例化方法对象的类数组
-     * @param targetParameterValues - 对象数组包含运行时参数实例。
+     * @param targetArguments - 对象数组包含运行时参数实例。
      * @param principal - 安全权限应用到的<code>Principal</code>
      * @throws Exception - 发生了执行错误
      */

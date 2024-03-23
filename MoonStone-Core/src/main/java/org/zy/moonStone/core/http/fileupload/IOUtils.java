@@ -1,10 +1,6 @@
-package org.zy.moonStone.core.http.fileupload;
+package org.zy.moonstone.core.http.fileupload;
 
-import java.io.Closeable;
-import java.io.EOFException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 /**
  * @dateTime 2022年11月19日;
@@ -146,7 +142,7 @@ public class IOUtils {
      * 从输入流读取字节。这个实现保证了它在放弃之前将读取尽可能多的字节;对于 {@link InputStream} 的子类来说，情况可能并不总是这样。
      *
      * @param input - 从哪里读取输入
-     * @param httpOutputBuffer - 目标
+     * @param buffer - 目标
      * @param offset - 初始偏移量到缓冲区
      * @param length - 要读取的长度，必须 &gt;= 0
      * @return 实际读取长度;如果达到EOF，是否会少于要求
@@ -176,7 +172,7 @@ public class IOUtils {
      * 这允许 {@link InputStream#read(byte[], int, int)} 可能读不到要求的字节数(很可能是因为到达EOF)。
      *
      * @param input - 从哪里读取输入
-     * @param httpOutputBuffer - 目标
+     * @param buffer - 目标
      *
      * @throws IOException - 如果读取文件时出现问题
      * @throws IllegalArgumentException - 如果长度是负的
@@ -193,7 +189,7 @@ public class IOUtils {
      * 这允许 {@link InputStream#read(byte[], int, int)} 可能读不到要求的字节数(很可能是因为到达EOF)。
      *
      * @param input - 从哪里读取输入
-     * @param httpOutputBuffer - 目标
+     * @param buffer - 目标
      * @param offset - 缓冲区的初始偏移量
      * @param length - 要读取的长度，必须 &gt;= 0
      *

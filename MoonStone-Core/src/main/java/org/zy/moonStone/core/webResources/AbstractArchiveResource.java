@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.webResources;
+package org.zy.moonstone.core.webResources;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,7 +21,7 @@ public abstract class AbstractArchiveResource extends AbstractResource {
     private final String baseUrl;
     /** 封装此资源的 JarEntry 实例 */
     private final JarEntry resource;
-    /** 原始的war文件url路径, {@link baseUrl } 可能添加了某种前缀，如："war:" */
+    /** 原始的war文件url路径, {@link #baseUrl } 可能添加了某种前缀，如："war:" */
     private final String codeBaseUrl;
     /** 资源名称 */
     private final String name;

@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.interfaces.webResources;
+package org.zy.moonstone.core.interfaces.webResources;
 
 import java.io.InputStream;
 import java.net.URL;

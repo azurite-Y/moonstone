@@ -1,24 +1,15 @@
-package org.zy.moonStone.core.http.fileupload;
+package org.zy.moonstone.core.http.fileupload;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
+import org.zy.moonstone.core.exceptions.FileUploadException;
+import org.zy.moonstone.core.exceptions.InvalidFileNameException;
+import org.zy.moonstone.core.interfaces.http.fileupload.FileItem;
+import org.zy.moonstone.core.interfaces.http.fileupload.FileItemHeaders;
+import org.zy.moonstone.core.util.http.parser.HttpParser;
+
+import java.io.*;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import org.zy.moonStone.core.exceptions.FileUploadException;
-import org.zy.moonStone.core.exceptions.InvalidFileNameException;
-import org.zy.moonStone.core.interfaces.http.fileupload.FileItem;
-import org.zy.moonStone.core.interfaces.http.fileupload.FileItemHeaders;
-import org.zy.moonStone.core.util.http.parser.HttpParser;
 
 /**
  * @dateTime 2022年11月19日;
@@ -29,7 +20,7 @@ import org.zy.moonStone.core.util.http.parser.HttpParser;
  * <p>
  * 为文件项创建的临时文件应该稍后删除。
  * 
- * @see FileUpload.parseRequest(RequestContext)
+ * @see FileUpload#parseRequest(RequestContext)
  */
 public class DiskFileItem implements FileItem {
 	/**

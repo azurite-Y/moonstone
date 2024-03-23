@@ -1,11 +1,11 @@
-package org.zy.moonStone.core.webResources;
+package org.zy.moonstone.core.webResources;
 
 import java.io.InputStream;
 
 import org.slf4j.Logger;
-import org.zy.moonStone.core.interfaces.webResources.WebResource;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceRoot;
-import org.zy.moonStone.core.util.http.FastHttpDateFormat;
+import org.zy.moonstone.core.interfaces.webResources.WebResource;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceRoot;
+import org.zy.moonstone.core.util.http.FastHttpDateFormat;
 
 /**
  * @dateTime 2022年8月26日;

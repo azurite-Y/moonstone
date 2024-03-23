@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.webResources;
+package org.zy.moonstone.core.webResources;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -20,10 +20,10 @@ import java.util.jar.Manifest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.interfaces.container.Context;
-import org.zy.moonStone.core.interfaces.webResources.WebResource;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceRoot;
-import org.zy.moonStone.core.util.http.FastHttpDateFormat;
+import org.zy.moonstone.core.interfaces.container.Context;
+import org.zy.moonstone.core.interfaces.webResources.WebResource;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceRoot;
+import org.zy.moonstone.core.util.http.FastHttpDateFormat;
 
 /**
  * @dateTime 2022年9月16日;

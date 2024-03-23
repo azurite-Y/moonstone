@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.interfaces.http.fileupload;
+package org.zy.moonstone.core.interfaces.http.fileupload;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,7 +6,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
-import org.zy.moonStone.core.exceptions.InvalidFileNameException;
+import org.zy.moonstone.core.exceptions.InvalidFileNameException;
+import org.zy.moonstone.core.http.fileupload.ServletFileUpload;
 
 /**
  * @dateTime 2022年11月19日;
@@ -16,7 +17,7 @@ import org.zy.moonStone.core.exceptions.InvalidFileNameException;
  * 在从 FileUpload 实例中检索该类的实例之后，可以使用get()一次性请求文件的所有内容，
  * 或者使用getInputStream()请求InputStream并处理该文件，而不尝试将其加载到内存中，这对于大型文件来说可能很方便。
  * 
- * @see FileUpload#parseRequest(RequestContext))
+ * @see ServletFileUpload#parseRequest(RequestContext))
  */
 public interface FileItem extends FileItemHeadersSupport {
 	

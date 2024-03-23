@@ -1,92 +1,32 @@
-package org.zy.moonStone.core.startup;
+package org.zy.moonstone.core.startup;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Stack;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.zy.moonstone.core.Globals;
+import org.zy.moonstone.core.LifecycleEvent;
+import org.zy.moonstone.core.connector.Connector;
+import org.zy.moonstone.core.container.*;
+import org.zy.moonstone.core.container.context.StandardContext;
+import org.zy.moonstone.core.exceptions.LifecycleException;
+import org.zy.moonstone.core.interfaces.container.*;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletContainerInitializer;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.HandlesTypes;
 import javax.servlet.annotation.WebServlet;
+import java.io.*;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Stack;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.Globals;
-import org.zy.moonStone.core.LifecycleEvent;
-import org.zy.moonStone.core.connector.Connector;
-import org.zy.moonStone.core.container.StandardEngine;
-import org.zy.moonStone.core.container.StandardHost;
-import org.zy.moonStone.core.container.StandardServer;
-import org.zy.moonStone.core.container.StandardService;
-import org.zy.moonStone.core.container.StandardWrapper;
-import org.zy.moonStone.core.container.context.StandardContext;
-import org.zy.moonStone.core.exceptions.LifecycleException;
-import org.zy.moonStone.core.interfaces.container.ConfigurationSource;
-import org.zy.moonStone.core.interfaces.container.Container;
-import org.zy.moonStone.core.interfaces.container.Context;
-import org.zy.moonStone.core.interfaces.container.Engine;
-import org.zy.moonStone.core.interfaces.container.Host;
-import org.zy.moonStone.core.interfaces.container.Lifecycle;
-import org.zy.moonStone.core.interfaces.container.LifecycleListener;
-import org.zy.moonStone.core.interfaces.container.Server;
-import org.zy.moonStone.core.interfaces.container.Service;
-import org.zy.moonStone.core.interfaces.container.Wrapper;
-import org.zy.moonStone.core.util.ContextName;
-import org.zy.moonStone.core.util.IOTools;
-
-// TODO: 临时目录的惰性初始化-只有在调用getTempDir()时，我们才需要创建它。这将避免需要baseDir
-// TODO: 允许没有基本目录的上下文，即只允许编程。这将禁用默认servlet。
 /**
  * @dateTime 2022年4月1日;
  * @author zy(azurite-Y);
  * @description
- * 用于嵌入/单元测试的最小 MoonStone 启动器。
- * <p>
- * 此类用于嵌入 MoonStone 的应用程序。
- * 
- * <p>
- * 要求:
- * <ul>
- *   <li>所有 MoonStone 类和servlet都在类路径中。(例如，所有都在一个大罐子中，或在 编程工具类路径 中，或在任何其他组合中)</li>
- *   <li>需要一个工作文件的临时目录</li>
- *   <li>无需配置文件。如果项目有一个带有web.xml文件的webapp，这个类提供了一些方法，但是它是可选的——你可以使用你自己的servlet。</li>
- * </ul>
- *
- * <p>
- * 有多种“添加”方法来配置servlet和webapps。默认情况下，这些方法创建一个简单的内存安全领域并应用它。若需要更复杂的安全处理，可以定义此类的子类。
- *
- * <p>
- * 这个类提供了一组配置web应用程序上下文的方便方法; <code>addWebapp()</code> 方法的所有重载。
- * 这些方法等同于将一个web应用程序添加到主机的appbase(通常是webapps目录)。
- * 这些方法创建一个Context，配置它与 <code>conf/web.xml</code> 提供的默认值等价(详细信息请参阅 (see {@link #initWebappDefaults(String)}，并将Context添加到主机。
- * 这些方法不使用全局默认的web.xml;相反，他们添加一个 {@link LifecycleListener} 来配置默认值。
- * 任何与应用程序打包的WEB-INF/web.xml和META-INF/context.xml都将正常处理。
- * 将应用普通的web片段和 {@link javax.servlet.ServletContainerInitializer} 处理。
- *
- * <p>
- * 在复杂的情况下，您可能更喜欢使用普通的MoonStone API来创建webapp上下文；例如，您可能需要在调用 {@link Host#addChild(Container)} 之前安装自定义Loader。
- * 要复制 <code>addWebapp</code> 方法的基本行为，您可能需要调用此类的两个方法：{@link #noDefaultWebXmlPath()} 和 {@link #getDefaultWebXmlListener()}
- *
- * <p>
- * {@link #getDefaultWebXmlListener()} 返回一个 {@link LifecycleListener} ，它添加了标准的DefaultServlet、JSP处理和欢迎文件。
- * 如果你添加这个监听器，你必须防止Tomcat应用任何标准的全局web.xml…
- *
- * <p>
- * {@link #noDefaultWebXmlPath()}  返回一个虚拟路径名来配置防止 {@link ContextConfig} 试图应用全局web.xml文件。
- *
- * <p>
- * 该类提供了main() 和几个简单的CLI参数。它可以用于简单的测试和演示
- * 
+ * 用于嵌入/单元测试的最小 moonstone 启动器。
  */
-public class MoonStone {
+public class Moonstone {
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
 	protected Server server;
@@ -95,10 +35,10 @@ public class MoonStone {
     
     protected String hostname = "localhost";
     
-    /** MoonStone 基本目录 */
+    /** moonstone 基本目录 */
     protected String basedir;
     
-    /** 设置应用程序加载根目录，若使用的是相对目录则相对于 {@link ServerProperties.MoonStone#basedir } */
+    /** 设置应用程序加载根目录，若使用的是相对目录则相对于 {@link #basedir } */
     protected String appBaseDir;
     
 
@@ -134,7 +74,7 @@ public class MoonStone {
 		this.basedir = basedir;
 	}
     /**
-     * 设置应用程序加载根目录，若使用的是相对目录则相对于 {@link ServerProperties.MoonStone#basedir }
+     * 设置应用程序加载根目录，若使用的是相对目录则相对于 {@link #basedir }
      * 
      * @param appBaseDir - 应用程序加载根目录
      */
@@ -147,7 +87,7 @@ public class MoonStone {
 	// method
 	// -------------------------------------------------------------------------------------
 	/**
-     * 使用指定的配置源初始化服务器。服务器将根据源文件中包含的 MoonStone 配置文件（server.xml、web.xml、context.xml、SSL证书等）加载。
+     * 使用指定的配置源初始化服务器。服务器将根据源文件中包含的 moonstone 配置文件（server.xml、web.xml、context.xml、SSL证书等）加载。
      * 如果未指定配置源，则将使用这些文件的默认位置。
      * 
      * @param source - 配置源
@@ -206,8 +146,8 @@ public class MoonStone {
     
     
     /**
-     * 获取嵌入式 MoonStone 使用的默认 HTTP 连接器。
-     * 它首先在服务中配置连接器。如果没有定义连接器，它将使用此 MoonStone 实例中指定的端口和地址创建并添加一个默认连接器，并将其返回以供进一步定制。
+     * 获取嵌入式 moonstone 使用的默认 HTTP 连接器。
+     * 它首先在服务中配置连接器。如果没有定义连接器，它将使用此 moonstone 实例中指定的端口和地址创建并添加一个默认连接器，并将其返回以供进一步定制。
      * @return
      */
     public Connector getConnector() {
@@ -332,51 +272,6 @@ public class MoonStone {
     }
 
     /**
-     * 将指定的WAR文件复制到主机的appBase，然后使用新复制的WAR调用 {@link #addWebapp(String, String)}。
-     * 当Tomcat实例停止时，WAR不会从主机的appBase中删除。
-     * 注意，{@link ExpandWar} 提供了实用程序方法，如果需要，可以使用这些方法删除WAR和/或扩展目录。
-     *
-     * @param contextPath - 要使用的上下文映射，""用于根上下文
-     * @param source - 应复制WAR的位置
-     * @return 部署的上下文
-     *
-     * @throws IOException - 如果在将WAR文件从指定URL复制到appBase时发生I/O错误
-     */
-    public Context addWebapp(String contextPath, URL source) throws IOException {
-        ContextName cn = new ContextName(contextPath, null);
-
-        // 确保尚未部署冲突的web应用程序
-        Host h = getHost();
-        if (h.findChild(cn.getName()) != null) {
-            throw new IllegalArgumentException(String.format("addWebapp - 子项冲突. url: %s, addContext: %s, originalContext: %s",
-                    source, contextPath, cn.getName()));
-        }
-
-        // 确保appBase不包含冲突的web应用程序
-        File targetWar = new File(h.getAppBaseFile(), cn.getBaseName() + ".war");
-        File targetDir = new File(h.getAppBaseFile(), cn.getBaseName());
-
-        if (targetWar.exists()) {
-            throw new IllegalArgumentException(String.format("addWebapp - war文件已存在. url: %s, contextName: %s, targetWar: %s",
-                    source, contextPath, targetWar.getAbsolutePath()));
-        }
-        if (targetDir.exists()) {
-            throw new IllegalArgumentException(String.format("addWebapp - 工作目录已存在. url: %s, contextName: %s, targetDir: %s",
-                    source, contextPath, targetDir.getAbsolutePath()));
-        }
-
-        URLConnection uConn = source.openConnection();
-
-        try (
-        		InputStream is = uConn.getInputStream();
-                OutputStream os = new FileOutputStream(targetWar)) {
-            IOTools.flow(is, os);
-        }
-
-        return addWebapp(contextPath, targetWar.getAbsolutePath());
-    }
-
-    /**
      * 添加上下文编程模式，无默认web。这意味着没有DefaultServlet和web socket支持。也没有 {@link ServletContainerInitializer} 处理，也没有注释处理。
      * 如果以编程方式添加 {@link ServletContainerInitializer} ，则仍然不会扫描 {@link HandlesTypes} 匹配项。
      *
@@ -407,11 +302,11 @@ public class MoonStone {
     public Context addContext(String contextPath, String docBase) {
         return addContext(getHost(), contextPath, docBase);
     }
-    
+
     
     // -------------------------------------------------------------------------------------
 	// 额外的定制
-	// 可以使用内部api调优各个 MoonStone 对象
+	// 可以使用内部api调优各个 moonstone 对象
 	// -------------------------------------------------------------------------------------
 	/**
 	 * @param host - 将在其中部署 context 的 host
@@ -538,7 +433,7 @@ public class MoonStone {
 
 
     /**
-     * 这相当于将一个web应用程序添加到主机的appBase(通常是 MoonStone 的webapps目录)
+     * 这相当于将一个web应用程序添加到主机的appBase(通常是 moonstone 的webapps目录)
      *
      * @param host - 将在其中部署 context 的 host
      * @param contextPath - 要使用的上下文映射，""用于根上下文。
@@ -600,7 +495,7 @@ public class MoonStone {
      */
     public static void initWebappDefaults(Context ctx) {
         // Default servlet
-        Wrapper servlet = addServlet(ctx, "default", "org.zy.moonStone.core.servlets.DefaultServlet");
+        Wrapper servlet = addServlet(ctx, "default", "org.zy.moonstone.core.servlets.DefaultServlet");
         servlet.setLoadOnStartup(1);
         servlet.setOverridable(true);
 
@@ -625,7 +520,7 @@ public class MoonStone {
      */
     public static void addDefaultMimeTypeMappings(Context context) {
         Properties defaultMimeMappings = new Properties();
-        try (InputStream is = MoonStone.class.getResourceAsStream("MimeTypeMappings.properties")) {
+        try (InputStream is = Moonstone.class.getResourceAsStream("MimeTypeMappings.properties")) {
             defaultMimeMappings.load(is);
             for (Map.Entry<Object, Object>  entry: defaultMimeMappings.entrySet()) {
                 context.addMimeMapping((String) entry.getKey(), (String) entry.getValue());
@@ -645,7 +540,7 @@ public class MoonStone {
 	    }
 	    if (basedir == null) {
 	        // 使用临时目录
-	        basedir = System.getProperty("user.dir") + "/MoonStone." + port;
+	        basedir = System.getProperty("user.dir") + "/moonstone." + port;
 	    }
 	
 	    File baseFile = new File(basedir);
@@ -695,10 +590,10 @@ public class MoonStone {
      * @throws Exception - 如果发生错误
      */
     public static void main(String[] args) throws Exception {
-        MoonStone moonStone = new MoonStone();
+        Moonstone moonstone = new Moonstone();
         
         // 创建一个 Moon 实例并让它解析配置文件。它还将设置一个关机挂钩，以便在需要时停止服务器。使用默认配置源
-        moonStone.init(null);
+        moonstone.init(null);
         boolean await = false;
         String path = "";
         // 处理命令行参数
@@ -708,7 +603,7 @@ public class MoonStone {
                     throw new IllegalArgumentException("无效的命令行, by args: " + args[i - 1]);
                 }
                 File war = new File(args[i]);
-                moonStone.addWebapp(path, war.getAbsolutePath());
+                moonstone.addWebapp(path, war.getAbsolutePath());
             } else if (args[i].equals("--path")) {
                 if (++i >= args.length) {
                     throw new IllegalArgumentException("无效的命令行, by args: " + args[i - 1]);
@@ -722,10 +617,10 @@ public class MoonStone {
                 throw new IllegalArgumentException("无效的命令行, by args: " + args[i]);
             }
         }
-        moonStone.start();
+        moonstone.start();
         // 理想情况下，实用程序线程是非守护进程
         if (await) {
-        	moonStone.getServer().await();
+        	moonstone.getServer().await();
         }
     }
     

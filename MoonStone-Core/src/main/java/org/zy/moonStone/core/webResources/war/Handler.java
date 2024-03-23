@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.webResources.war;
+package org.zy.moonstone.core.webResources.war;
 
 import java.io.IOException;
 import java.net.URL;
@@ -48,7 +48,7 @@ public class Handler extends URLStreamHandler {
             /*
              * 解决安全策略文件中的 URL 问题。
              * 
-             * 在 Windows 上，在策略文件中使用 ${moonStone.[home|base]} 会导致代码库 URL 的格式为 file:C:/... 而它们应该是 file:/C:/...
+             * 在 Windows 上，在策略文件中使用 ${moonstone.[home|base]} 会导致代码库 URL 的格式为 file:C:/... 而它们应该是 file:/C:/...
              * 
              * 对于 file: 和 jar: URL，JRE 对此进行了补偿。 它不会为 war:file:... URL 补偿这一点。 因此，在这里这样做
              */

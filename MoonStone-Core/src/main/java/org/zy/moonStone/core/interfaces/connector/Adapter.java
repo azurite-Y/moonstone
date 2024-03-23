@@ -1,8 +1,8 @@
-package org.zy.moonStone.core.interfaces.connector;
+package org.zy.moonstone.core.interfaces.connector;
 
-import org.zy.moonStone.core.http.Request;
-import org.zy.moonStone.core.http.Response;
-import org.zy.moonStone.core.util.net.SocketEvent;
+import org.zy.moonstone.core.http.Request;
+import org.zy.moonstone.core.http.Response;
+import org.zy.moonstone.core.util.net.SocketEvent;
 
 /**
  * @dateTime 2022年1月21日;
@@ -21,7 +21,7 @@ public interface Adapter {
      *   	 <li>如果发生输入/输出错误并且我们正在处理包含的 servlet（否则它会被顶级错误处理程序机制吞下和处理）
      *       <li>如果 servlet 抛出异常并且我们正在处理包含的 servlet（否则它会被顶级错误处理机制吞并和处理）
      *  </ul>
-     *  MoonStone 应该能够处理和记录任何其他异常（包括运行时异常）
+     *  moonstone 应该能够处理和记录任何其他异常（包括运行时异常）
      */
     public void service(Request req, Response res) throws Exception;
 

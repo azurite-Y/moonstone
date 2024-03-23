@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.webResources;
+package org.zy.moonstone.core.webResources;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,12 +11,12 @@ import java.util.zip.ZipEntry;
  * @author zy(azurite-Y);
  * @description 这个子类的目的是获取对META-INF/和META-INF/MANIFEST.MF的JarEntry对象的引用，否则这些对象将被JarInputStream实现吞没
  */
-public class MoonStoneJarInputStream extends JarInputStream {
+public class MoonstoneJarInputStream extends JarInputStream {
 	private JarEntry metaInfEntry;
     private JarEntry manifestEntry;
 
 
-    MoonStoneJarInputStream(InputStream in) throws IOException {
+    MoonstoneJarInputStream(InputStream in) throws IOException {
         super(in);
     }
 

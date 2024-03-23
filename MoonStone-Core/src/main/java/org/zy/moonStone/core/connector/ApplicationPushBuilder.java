@@ -1,30 +1,17 @@
-package org.zy.moonStone.core.connector;
+package org.zy.moonstone.core.connector;
 
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import org.zy.moonstone.core.http.Request;
+import org.zy.moonstone.core.interfaces.container.Context;
+import org.zy.moonstone.core.interfaces.http.CookieProcessor;
+import org.zy.moonstone.core.session.SessionConfig;
+import org.zy.moonstone.core.util.buf.MessageBytes;
+import org.zy.moonstone.core.util.collections.CaseInsensitiveKeyMap;
+import org.zy.moonstone.core.util.http.ActionCode;
 
 import javax.servlet.SessionTrackingMode;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.PushBuilder;
-
-import org.zy.moonStone.core.http.Request;
-import org.zy.moonStone.core.interfaces.container.Context;
-import org.zy.moonStone.core.interfaces.http.CookieProcessor;
-import org.zy.moonStone.core.session.SessionConfig;
-import org.zy.moonStone.core.util.buf.MessageBytes;
-import org.zy.moonStone.core.util.collections.CaseInsensitiveKeyMap;
-import org.zy.moonStone.core.util.http.ActionCode;
+import javax.servlet.http.*;
+import java.nio.charset.Charset;
+import java.util.*;
 
 /**
  * @dateTime 2022年11月24日;
@@ -53,7 +40,7 @@ import org.zy.moonStone.core.util.http.ActionCode;
  * 		<li>如果 {@link HttpServletResponse#addCookie(Cookie)} 已在相关响应中调用，则相应的Cookie标头将添加到PushBuilder中，除非 {@link Cookie#getMaxAge()} &lt;=0，在这种情况下，Cookie将从生成器中删除。</li>
  * </ul>
  * <p>
- * 在调用 {@link #pash} 之前，必须在PushBuilderinstance上调用 {@link #puth} 方法。如果这样做失败，则必须导致从 {@link #push} 抛出异常，如该方法中指定的那样
+ * 在调用 {@link #path} 之前，必须在PushBuilderinstance上调用 {@link #path} 方法。如果这样做失败，则必须导致从 {@link #push} 抛出异常，如该方法中指定的那样
  * 
  * <p>
  * 在调用 {@link #push} 方法之前，可以通过链式调用mutatormethods对PushBuilder进行定制，以使用构建器的当前状态发起异步推送请求。

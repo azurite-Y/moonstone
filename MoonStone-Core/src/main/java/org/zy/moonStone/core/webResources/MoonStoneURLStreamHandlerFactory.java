@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.webResources;
+package org.zy.moonstone.core.webResources;
 
 import java.net.URL;
 import java.net.URLStreamHandler;
@@ -6,22 +6,22 @@ import java.net.URLStreamHandlerFactory;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.zy.moonStone.core.webResources.war.Handler;
+import org.zy.moonstone.core.webResources.war.Handler;
 
 /**
  * @dateTime 2022年9月2日;
  * @author zy(azurite-Y);
  * @description
  */
-public class MoonStoneURLStreamHandlerFactory implements URLStreamHandlerFactory {
+public class MoonstoneURLStreamHandlerFactory implements URLStreamHandlerFactory {
 	private static final String WAR_PROTOCOL = "war";
 	private static final String CLASSPATH_PROTOCOL = "classpath";
 
-	/** 当前 {@link MoonStoneURLStreamHandlerFactory}  是否已注册到 Java 虚拟机 */
+	/** 当前 {@link MoonstoneURLStreamHandlerFactory}  是否已注册到 Java 虚拟机 */
 	private final boolean registered;
 	
 	/** 单利实例 */
-	private static volatile MoonStoneURLStreamHandlerFactory instance = null;
+	private static volatile MoonstoneURLStreamHandlerFactory instance = null;
 
 	/** 应用程序定义的流处理程序工厂的工厂列表 */
 	private final List<URLStreamHandlerFactory> userFactories = new CopyOnWriteArrayList<>();
@@ -32,7 +32,7 @@ public class MoonStoneURLStreamHandlerFactory implements URLStreamHandlerFactory
 	 *
 	 * @return 对单例实例的引用
 	 */
-	public static MoonStoneURLStreamHandlerFactory getInstance() {
+	public static MoonstoneURLStreamHandlerFactory getInstance() {
 		getInstanceInternal(true);
 		return instance;
 	}
@@ -43,12 +43,12 @@ public class MoonStoneURLStreamHandlerFactory implements URLStreamHandlerFactory
 	 * @param register - 是否注册到 Java 虚拟机
 	 * @return 对单例实例的引用
 	 */
-	private static MoonStoneURLStreamHandlerFactory getInstanceInternal(boolean register) {
+	private static MoonstoneURLStreamHandlerFactory getInstanceInternal(boolean register) {
 		// 双重检查锁
 		if (instance == null) {
-			synchronized (MoonStoneURLStreamHandlerFactory.class) {
+			synchronized (MoonstoneURLStreamHandlerFactory.class) {
 				if (instance == null) {
-					instance = new MoonStoneURLStreamHandlerFactory(register);
+					instance = new MoonstoneURLStreamHandlerFactory(register);
 				}
 			}
 		}
@@ -103,7 +103,7 @@ public class MoonStoneURLStreamHandlerFactory implements URLStreamHandlerFactory
 	 * 
 	 * @param register - 是否注册到 Java 虚拟机
 	 */
-	private MoonStoneURLStreamHandlerFactory(boolean register) {
+	private MoonstoneURLStreamHandlerFactory(boolean register) {
 		this.registered = register;
 		if (register) {
 			/**
@@ -144,7 +144,7 @@ public class MoonStoneURLStreamHandlerFactory implements URLStreamHandlerFactory
 	 */
 	@Override
 	public URLStreamHandler createURLStreamHandler(String protocol) {
-		// MoonStone 的处理程序始终优先，因此应用程序无法覆盖它
+		// moonstone 的处理程序始终优先，因此应用程序无法覆盖它
 		if (WAR_PROTOCOL.equals(protocol)) {
 			return new Handler();
 		} else if (CLASSPATH_PROTOCOL.equals(protocol)) {

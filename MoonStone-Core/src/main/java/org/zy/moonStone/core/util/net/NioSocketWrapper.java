@@ -1,4 +1,13 @@
-package org.zy.moonStone.core.util.net;
+package org.zy.moonstone.core.util.net;
+
+import io.netty.buffer.ByteBuf;
+import org.zy.moonstone.core.util.ExceptionUtils;
+import org.zy.moonstone.core.util.collections.SynchronizedStack;
+import org.zy.moonstone.core.util.http.FastHttpDateFormat;
+import org.zy.moonstone.core.util.net.NioChannel.ClosedNioChannel;
+import org.zy.moonstone.core.util.net.NioEndpoint.Poller;
+import org.zy.moonstone.core.util.net.NioEndpoint.SendfileData;
+import org.zy.moonstone.core.util.net.interfaces.SSLSupport;
 
 import java.io.BufferedInputStream;
 import java.io.EOFException;
@@ -12,16 +21,6 @@ import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
-import org.zy.moonStone.core.util.ExceptionUtils;
-import org.zy.moonStone.core.util.collections.SynchronizedStack;
-import org.zy.moonStone.core.util.http.FastHttpDateFormat;
-import org.zy.moonStone.core.util.net.NioChannel.ClosedNioChannel;
-import org.zy.moonStone.core.util.net.NioEndpoint.Poller;
-import org.zy.moonStone.core.util.net.NioEndpoint.SendfileData;
-import org.zy.moonStone.core.util.net.interfaces.SSLSupport;
-
-import io.netty.buffer.ByteBuf;
 
 /**
  * @dateTime 2022年1月24日;
@@ -275,8 +274,7 @@ public class NioSocketWrapper extends SocketWrapperBase<NioChannel> {
 	 * 非阻塞是读取全部的请求数据。<br/>
 	 * 一次读取之后若缓冲字节数组未使用完，则代表输入流中当前已无待读字节
 	 * 
-	 * @param client
-	 * @param to     - 存储数据的缓冲区对象
+	 * @param to - 存储数据的缓冲区对象
 	 * @throws IOException
 	 */
 	@Deprecated

@@ -1,4 +1,21 @@
-package org.zy.moonStone.core.loaer;
+package org.zy.moonstone.core.loaer;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.zy.moonstone.core.Globals;
+import org.zy.moonstone.core.LifecycleState;
+import org.zy.moonstone.core.exceptions.LifecycleException;
+import org.zy.moonstone.core.interfaces.container.Lifecycle;
+import org.zy.moonstone.core.interfaces.container.LifecycleListener;
+import org.zy.moonstone.core.interfaces.loader.InstrumentableClassLoader;
+import org.zy.moonstone.core.interfaces.webResources.WebResource;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceRoot;
+import org.zy.moonstone.core.security.PermissionCheck;
+import org.zy.moonstone.core.util.ExceptionUtils;
+import org.zy.moonstone.core.util.IntrospectionUtils;
+import org.zy.moonstone.core.util.compat.JreCompat;
+import org.zy.moonstone.core.util.http.FastHttpDateFormat;
+import org.zy.moonstone.core.webResources.MoonstoneURLStreamHandlerFactory;
 
 import java.io.File;
 import java.io.FilePermission;
@@ -13,52 +30,16 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.security.AccessControlException;
-import java.security.AccessController;
-import java.security.CodeSource;
-import java.security.Permission;
-import java.security.PermissionCollection;
-import java.security.Policy;
-import java.security.PrivilegedAction;
-import java.security.ProtectionDomain;
+import java.security.*;
 import java.security.cert.Certificate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.ConcurrentModificationException;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.NoSuchElementException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.jar.Attributes;
 import java.util.jar.Attributes.Name;
 import java.util.jar.Manifest;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.Globals;
-import org.zy.moonStone.core.LifecycleState;
-import org.zy.moonStone.core.exceptions.LifecycleException;
-import org.zy.moonStone.core.interfaces.container.Lifecycle;
-import org.zy.moonStone.core.interfaces.container.LifecycleListener;
-import org.zy.moonStone.core.interfaces.loader.InstrumentableClassLoader;
-import org.zy.moonStone.core.interfaces.webResources.WebResource;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceRoot;
-import org.zy.moonStone.core.security.PermissionCheck;
-import org.zy.moonStone.core.util.ExceptionUtils;
-import org.zy.moonStone.core.util.IntrospectionUtils;
-import org.zy.moonStone.core.util.compat.JreCompat;
-import org.zy.moonStone.core.util.http.FastHttpDateFormat;
-import org.zy.moonStone.core.webResources.MoonStoneURLStreamHandlerFactory;
 
 /**
  * @dateTime 2022年8月22日;
@@ -222,7 +203,7 @@ public abstract class WebappClassLoaderBase extends URLClassLoader implements Li
      * 此方法通过反射调用
      * 
      * @param parent - 父级加载器
-     * @see {@link WebappLoader#createClassLoader()}
+     * @see WebappLoader#createClassLoader()
      */
     protected WebappClassLoaderBase(ClassLoader parent) {
         super(new URL[0], parent);
@@ -935,7 +916,7 @@ public abstract class WebappClassLoaderBase extends URLClassLoader implements Li
                 clazz = findClass(name);
                 if (clazz != null) {
                     if (logger.isDebugEnabled())
-                        logger.debug("Load Class From Local Repository. by clazz: [{}]", clazz, this.getClass().getSimpleName());
+                        logger.debug("Load Class From Local Repository. by clazz: [{}]", this.getClass().getTypeName());
                     if (resolve)
                         resolveClass(clazz);
                     return clazz;
@@ -1685,13 +1666,13 @@ public abstract class WebappClassLoaderBase extends URLClassLoader implements Li
         java.beans.Introspector.flushCaches();
 
         // 清除任何自定义 URLStreamHandler
-        MoonStoneURLStreamHandlerFactory.release(this);
+        MoonstoneURLStreamHandlerFactory.release(this);
     }
 
 
     private final void clearReferencesJdbc() {
     	try {
-    		Class<?> lpClass = Class.forName("org.zy.moonStone.core.loaer.JdbcLeakPrevention");
+    		Class<?> lpClass = Class.forName("org.zy.moonstone.core.loaer.JdbcLeakPrevention");
     		Object obj = lpClass.getConstructor().newInstance();
     		
     		@SuppressWarnings("unchecked")
@@ -1886,7 +1867,7 @@ public abstract class WebappClassLoaderBase extends URLClassLoader implements Li
 	    } catch (Exception e) {
 	        Throwable t = ExceptionUtils.unwrapInvocationTargetException(e);
 	        ExceptionUtils.handleThrowable(t);
-	        logger.warn("WebappClassLoader 停止 Timer 线程失败", thread.getName(), getContextName(), t);
+	        logger.warn("WebappClassLoader 停止 Timer 线程失败. By Thread: " + thread.getName() + ", Context: '" +  getContextName() + "'", t);
 	    }
 	}
 
@@ -1905,7 +1886,7 @@ public abstract class WebappClassLoaderBase extends URLClassLoader implements Li
         // 以相反的顺序逐步执行这些方法，以查找对任何 MoonAdapter 方法的调用。
         for (int i = elements.length - 1; i >= 0; i--) {
             StackTraceElement element = elements[i];
-            if ("org.zy.moonStone.core.connector.MoonAdapter".equals(element.getClassName())) {
+            if ("org.zy.moonstone.core.connector.MoonAdapter".equals(element.getClassName())) {
                 return true;
             }
         }
@@ -2183,7 +2164,7 @@ public abstract class WebappClassLoaderBase extends URLClassLoader implements Li
                     }
                 }
             } catch (ConcurrentModificationException e) {
-                logger.warn("WebappClassLoader loadedByThisOrChildFail", clazz.getName(), getContextName(), e);
+                logger.warn("WebappClassLoader 加载失败, by class: " + clazz.getName() + ", ContextName: '" + getContextName() + "'", e);
             }
         }
         return false;

@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.util.buf;
+package org.zy.moonstone.core.util.buf;
 
 import java.nio.ByteBuffer;
 import java.util.concurrent.atomic.AtomicBoolean;

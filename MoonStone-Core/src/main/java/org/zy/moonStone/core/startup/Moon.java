@@ -1,9 +1,9 @@
-package org.zy.moonStone.core.startup;
+package org.zy.moonstone.core.startup;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.exceptions.LifecycleException;
-import org.zy.moonStone.core.interfaces.container.Server;
+import org.zy.moonstone.core.exceptions.LifecycleException;
+import org.zy.moonstone.core.interfaces.container.Server;
 
 /**
  * @dateTime 2021年12月30日;
@@ -118,7 +118,7 @@ public class Moon {
 
         long t2 = System.nanoTime();
         if(logger.isInfoEnabled()) {
-            logger.info("Moon 初始化错误", Long.valueOf((t2 - t1) / 1000000));
+            logger.info("Moon 初始化错误 {}", Long.valueOf((t2 - t1) / 1000000));
         }
     }
 }

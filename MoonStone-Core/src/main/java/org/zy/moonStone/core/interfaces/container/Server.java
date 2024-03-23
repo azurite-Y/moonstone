@@ -1,15 +1,15 @@
-package org.zy.moonStone.core.interfaces.container;
+package org.zy.moonstone.core.interfaces.container;
 
 import java.io.File;
 import java.util.concurrent.ScheduledExecutorService;
 
-import org.zy.moonStone.core.startup.Moon;
+import org.zy.moonstone.core.startup.Moon;
 
 /**
  * @dateTime 2021年12月29日;
  * @author zy(azurite-Y);
  * @description 
- * 服务器元素表示整个MoonStone servlet容器。它的属性表示servlet容器作为一个整体的特性。服务器可以包含一个或多个服务以及顶级命名资源集。
+ * 服务器元素表示整个moonstone servlet容器。它的属性表示servlet容器作为一个整体的特性。服务器可以包含一个或多个服务以及顶级命名资源集。
  * <p>
  * 通常，此接口的实现也将实现生命周期，这样当调用start（）和stop（）方法时，所有定义的服务也将启动或停止。
  * </p>
@@ -109,14 +109,14 @@ public interface Server extends Lifecycle {
 
 	/**
 	 * @return 配置的基本(实例)目录。注意，home和base可能相同(默认情况下也是)。
-	 * 如果没有设置这个值，将使用 {@link #getCatalinaHome()}  返回的值
+	 * 如果没有设置这个值，将使用 {@link #getMoonHome()} 返回的值
 	 */
 	public File getMoonBase();
 
 	/**
 	 * 设置配置的基本(实例)目录。注意，home和base可能相同(默认情况下也是).
 	 *
-	 * @param catalinaBase - 配置的基本目录
+	 * @param moonBase - 配置的基本目录
 	 */
 	public void setMoonBase(File moonBase);
 

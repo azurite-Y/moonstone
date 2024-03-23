@@ -1,26 +1,21 @@
-package org.zy.moonStone.core.mapper;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-
-import javax.servlet.http.MappingMatch;
+package org.zy.moonstone.core.mapper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.Constants;
-import org.zy.moonStone.core.interfaces.container.Context;
-import org.zy.moonStone.core.interfaces.container.Host;
-import org.zy.moonStone.core.interfaces.container.Wrapper;
-import org.zy.moonStone.core.interfaces.webResources.WebResource;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceRoot;
-import org.zy.moonStone.core.util.buf.CharChunk;
-import org.zy.moonStone.core.util.buf.MessageBytes;
+import org.zy.moonstone.core.Constants;
+import org.zy.moonstone.core.interfaces.container.Context;
+import org.zy.moonstone.core.interfaces.container.Host;
+import org.zy.moonstone.core.interfaces.container.Wrapper;
+import org.zy.moonstone.core.interfaces.webResources.WebResource;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceRoot;
+import org.zy.moonstone.core.util.buf.CharChunk;
+import org.zy.moonstone.core.util.buf.MessageBytes;
+
+import javax.servlet.http.MappingMatch;
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @dateTime 2022年8月16日;
@@ -379,14 +374,13 @@ public class Mapper {
                 	// 由新 wrapper 替换旧值后，更新 Context 中的扩展 wrapper
                     context.extensionWrappers = newWrappers;
                 }
-            } else if (path.equals("/")) {
+            } else if ("/".equals(path)) {
                 // 根路径上下文，设置默认 wrapper
-                MappedWrapper newWrapper = new MappedWrapper("", wrapper, resourceOnly);
-                context.defaultWrapper = newWrapper;
+                context.defaultWrapper = new MappedWrapper("", wrapper, resourceOnly);
             } else {
                 // 精准 wrapper
                 final String name;
-                if (path.length() == 0) {
+                if (path.isEmpty()) {
                     // Context 根映射的特殊情况，它被视为精确匹配
                     name = "/";
                 } else {
@@ -458,13 +452,13 @@ public class Mapper {
                 if (removeMap(oldWrappers, newWrappers, name)) {
                     context.extensionWrappers = newWrappers;
                 }
-            } else if (path.equals("/")) {
+            } else if ("/".equals(path)) {
                 // Default wrapper
                 context.defaultWrapper = null;
             } else {
                 // Exact wrapper
                 String name;
-                if (path.length() == 0) {
+                if (path.isEmpty()) {
                     // 上下文根映射的特殊情况，它被视为精确匹配
                     name = "/";
                 } else {
@@ -617,7 +611,7 @@ public class Mapper {
 	 * 
 	 * @see #find(MapElement[], String)
 	 */
-	private static final <T, E extends MapElement<T>> E exactFind(E[] map, String name) {
+	private static <T, E extends MapElement<T>> E exactFind(E[] map, String name) {
 	    int pos = find(map, name);
 	    if (pos >= 0) {
 	        E result = map[pos];
@@ -654,7 +648,7 @@ public class Mapper {
      * 
      * @param oldMap - 查找数据数组
      * @param newMap - 存储修改之后的数据集数组
-     * @param name - 指定查找的名称
+     * @param newElement - 指定查找的名称
      * @return true代表更换旧值成功，false代表读取容器中无插入数据
      * 
      * @param <T> -  MapElement 子类封装的对象类型
@@ -716,7 +710,7 @@ public class Mapper {
         ContextVersion contextVersion = exactFind(context.versions, version);
         if (contextVersion == null) {
             if (!silent) {
-            	logger.error("未找到指定 Context 的 ContextVersion , by contexPath: [{}], version: [{}]", contextPath, version);
+            	logger.error("未找到指定 Context 的 ContextVersion , by contextPath: [{}], version: [{}]", contextPath, version);
             }
             return null;
         }
@@ -973,7 +967,7 @@ public class Mapper {
     /**
      * Wrapper 映射
 
-     * @param version - 要映射的请求中包含的版本（如果有）
+     * @param contextVersion - 要映射的请求中包含的版本（如果有）
      * @param uri - URI
      * @param mappingData - 该结构将包含映射操作的结果
      * @throws IOException - 如果缓冲区太小而无法保存结果映射
@@ -1070,7 +1064,7 @@ public class Mapper {
 		if (wrapper != null) {
 			mappingData.requestPath.setString(wrapper.name);
 			mappingData.wrapper = wrapper.object;
-			if (uri.equals("/")) {
+			if ("/".equals(uri)) {
 				// Context 根映射 servlet 的特殊处理
 				mappingData.pathInfo.setString("/");
 				mappingData.wrapperPath.setString("");
@@ -1330,7 +1324,7 @@ public class Mapper {
             this.nesting = nesting;
             for (int i = 0; i < contexts.length; i++) {
 				MappedContext mappedContext = contexts[i];
-				if (mappedContext.name.equals("")) {
+				if ("".equals(mappedContext.name)) {
 					this.defaultContextIndex = i;
 					break;
 				}

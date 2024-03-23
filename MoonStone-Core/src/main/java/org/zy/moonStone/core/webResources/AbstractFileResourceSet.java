@@ -1,13 +1,13 @@
-package org.zy.moonStone.core.webResources;
+package org.zy.moonstone.core.webResources;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.zy.moonStone.core.exceptions.LifecycleException;
-import org.zy.moonStone.core.util.RequestUtil;
-import org.zy.moonStone.core.util.compat.JrePlatform;
+import org.zy.moonstone.core.exceptions.LifecycleException;
+import org.zy.moonstone.core.util.RequestUtil;
+import org.zy.moonstone.core.util.compat.JrePlatform;
 
 /**
  * @dateTime 2022年8月25日;
@@ -156,7 +156,7 @@ public abstract class AbstractFileResourceSet extends AbstractResourceSet {
      *
      * @param path - 规范化的路径
      * 
-     * @implNote {@link File.separatorChar }:
+     * @implNote {@link File#separatorChar }:
      * 系统相关的默认名称分隔符字符。此字段初始化为包含系统属性file.separator值的第一个字符。
      * 在UNIX系统上，此字段的值为“/”；在Microsoft Windows系统上，它是“\\”。
      */

@@ -1,4 +1,6 @@
-package org.zy.moonStone.core.interfaces.container;
+package org.zy.moonstone.core.interfaces.container;
+
+import org.zy.moonstone.core.interfaces.container.Contained;
 
 import java.util.Set;
 
@@ -16,7 +18,7 @@ public interface Pipeline extends Contained {
 	/**
 	 * @return 这个阀门实例已经被区分为这个管道的基本阀门(如果有的话).
 	 */
-	public Valve getBasic();
+	public org.zy.moonstone.core.interfaces.container.Valve getBasic();
 
 
 	/**
@@ -26,7 +28,7 @@ public interface Pipeline extends Contained {
 	 *
 	 * @param valve - 要区分为基本valve的valve
 	 */
-	public void setBasic(Valve valve);
+	public void setBasic(org.zy.moonstone.core.interfaces.container.Valve valve);
 
 
 	/**
@@ -41,13 +43,13 @@ public interface Pipeline extends Contained {
 	 * @exception IllegalArgumentException - 如果指定的阀门拒绝与此容器相关联
 	 * @exception IllegalStateException - 如果指定的阀门已经与一个不同的容器相关联
 	 */
-	public void addValve(Valve valve);
+	public void addValve(org.zy.moonstone.core.interfaces.container.Valve valve);
 
 
 	/**
 	 * @return 与此容器相关联的管道中的阀门集，包括基本阀门(如果有)。如果没有这样的阀门，则返回一个零长度阵列。.
 	 */
-	public Valve[] getValves();
+	public org.zy.moonstone.core.interfaces.container.Valve[] getValves();
 
 
 	/**
@@ -56,14 +58,14 @@ public interface Pipeline extends Contained {
 	 * <p>
 	 * 实现注意:实现预期会触发容器。如果调用成功，则为关联容器REMOVE_VALVE_EVENT
 	 */
-	public void removeValve(Valve valve);
+	public void removeValve(org.zy.moonstone.core.interfaces.container.Valve valve);
 
 
 	/**
 	 * 获取首位Valve，若为null则返回基础的Valve
 	 * @return 这个阀门实例已经被区分为这个管道的基本阀门(如果有的话).
 	 */
-	public Valve getFirst();
+	public org.zy.moonstone.core.interfaces.container.Valve getFirst();
 
 
 	/**

@@ -1,11 +1,12 @@
-package org.zy.moonStone.core.servlets;
+package org.zy.moonstone.core.servlets;
 
-import java.util.Locale;
+import org.zy.moonstone.core.connector.HttpResponse;
 
 import javax.servlet.ServletResponse;
 import javax.servlet.ServletResponseWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
+import java.util.Locale;
 
 /**
  * @dateTime 2022年11月16日;
@@ -23,7 +24,7 @@ class ApplicationResponse extends ServletResponseWrapper {
 	 */
     protected boolean included = false;
 
-    
+
 	// -------------------------------------------------------------------------------------
 	// 构造器
 	// -------------------------------------------------------------------------------------
@@ -62,7 +63,6 @@ class ApplicationResponse extends ServletResponseWrapper {
      */
     @Override
     public void setContentLength(int len) {
-
         if (!included)
             getResponse().setContentLength(len);
 
@@ -76,7 +76,6 @@ class ApplicationResponse extends ServletResponseWrapper {
      */
     @Override
     public void setContentLengthLong(long len) {
-
         if (!included)
             getResponse().setContentLengthLong(len);
 
@@ -90,7 +89,6 @@ class ApplicationResponse extends ServletResponseWrapper {
      */
     @Override
     public void setContentType(String type) {
-
         if (!included)
             getResponse().setContentType(type);
 

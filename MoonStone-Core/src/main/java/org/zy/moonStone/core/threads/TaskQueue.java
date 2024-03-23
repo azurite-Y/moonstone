@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.threads;
+package org.zy.moonstone.core.threads;
 
 import java.util.Collection;
 import java.util.concurrent.LinkedBlockingQueue;

@@ -1,10 +1,10 @@
-package org.zy.moonStone.core.util;
+package org.zy.moonstone.core.util;
+
+import org.zy.moonstone.core.util.compat.JreCompat;
 
 import java.io.InputStream;
 import java.util.Locale;
 import java.util.Properties;
-
-import org.zy.moonStone.core.util.compat.JreCompat;
 
 /**
  * @dateTime 2022年4月12日;
@@ -16,7 +16,7 @@ public class CharsetMapper {
 	/**
      * 默认属性资源名称
      */
-    public static final String DEFAULT_RESOURCE = "org/zy/moonStone/core/util/CharsetMapperDefault.properties";
+    public static final String DEFAULT_RESOURCE = "org/zy/moonstone/core/util/CharsetMapperDefault.properties";
     
     /**
      * 已从指定或默认属性资源初始化的映射属性
@@ -40,7 +40,7 @@ public class CharsetMapper {
             try (InputStream stream = ClassLoader.getSystemResourceAsStream(name)) {
                 map.load(stream);
             } catch (Throwable t) {
-                ExceptionUtils.handleThrowable(t);
+                org.zy.moonstone.core.util.ExceptionUtils.handleThrowable(t);
                 throw new IllegalArgumentException(t);
             }
         }

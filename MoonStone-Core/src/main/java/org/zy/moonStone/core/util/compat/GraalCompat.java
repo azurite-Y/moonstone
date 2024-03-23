@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.util.compat;
+package org.zy.moonstone.core.util.compat;
 
 import java.io.IOException;
 

@@ -1,11 +1,11 @@
-package org.zy.moonStone.core.http.fileupload;
+package org.zy.moonstone.core.http.fileupload;
+
+import org.zy.moonstone.core.exceptions.InvalidFileNameException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import org.zy.moonStone.core.exceptions.InvalidFileNameException;
 
 /**
  * @dateTime 2022年11月19日;
@@ -46,7 +46,7 @@ public final class Streams {
      * @param inputStream - 正在读取的输入流。可以保证在流中调用 {@link InputStream#close()}。
      * @param outputStream - 数据应写入其中的输出流。可能为null，在这种情况下，输入的流内容被简单地丢弃。
      * @param closeOutputStream - true 保证在流上调用 {@link OutputStream#close()}。False表示最后只调用{@link OutputStream#flush()}。
-     * @param httpOutputBuffer - 临时缓冲区，用于复制数据。
+     * @param buffer - 临时缓冲区，用于复制数据。
      * @return 已复制的字节数。
      * 
      * @throws IOException - 如果发生I/O错误

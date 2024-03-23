@@ -1,15 +1,15 @@
-package org.zy.moonStone.core.http;
+package org.zy.moonstone.core.http;
+
+import org.zy.moonstone.core.Constants;
+import org.zy.moonstone.core.interfaces.container.AsyncContextCallback;
+import org.zy.moonstone.core.security.PrivilegedGetTccl;
+import org.zy.moonstone.core.security.PrivilegedSetTccl;
+import org.zy.moonstone.core.util.net.AbstractEndpoint.Handler.SocketState;
+import org.zy.moonstone.core.util.net.ContainerThreadMarker;
 
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.concurrent.atomic.AtomicLong;
-
-import org.zy.moonStone.core.Constants;
-import org.zy.moonStone.core.interfaces.container.AsyncContextCallback;
-import org.zy.moonStone.core.security.PrivilegedGetTccl;
-import org.zy.moonStone.core.security.PrivilegedSetTccl;
-import org.zy.moonStone.core.util.net.AbstractEndpoint.Handler.SocketState;
-import org.zy.moonStone.core.util.net.ContainerThreadMarker;
 
 /**
  * @dateTime 2022年12月4日;
@@ -91,7 +91,7 @@ public class AsyncStateMachine {
 
 	/**
 	 * 跟踪此状态机当前生成的异步处理。每次启动异步处理时，生成都会递增。
-	 * 这样做的主要目的是使 MoonStone 能够检测和阻止尝试使用当前一代处理上一代事件，因为处理此类事件通常结局很糟糕
+	 * 这样做的主要目的是使 moonstone 能够检测和阻止尝试使用当前一代处理上一代事件，因为处理此类事件通常结局很糟糕
 	 */
 	private final AtomicLong generation = new AtomicLong(0);
 	

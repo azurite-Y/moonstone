@@ -1,8 +1,8 @@
-package org.zy.moonStone.core.threads;
+package org.zy.moonstone.core.threads;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.exceptions.StopPooledThreadException;
+import org.zy.moonstone.core.exceptions.StopPooledThreadException;
 
 /**
  * @dateTime 2021年12月31日;

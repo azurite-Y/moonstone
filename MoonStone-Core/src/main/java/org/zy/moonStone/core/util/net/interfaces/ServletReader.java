@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.util.net.interfaces;
+package org.zy.moonstone.core.util.net.interfaces;
 
 /**
  * @dateTime 2022年7月11日;

@@ -1,4 +1,14 @@
-package org.zy.moonStone.core.util.net;
+package org.zy.moonstone.core.util.net;
+
+import org.slf4j.Logger;
+import org.zy.moonstone.core.interfaces.connector.ProtocolHandler;
+import org.zy.moonstone.core.threads.LimitLatch;
+import org.zy.moonstone.core.threads.TaskQueue;
+import org.zy.moonstone.core.threads.TaskThreadFactory;
+import org.zy.moonstone.core.threads.ThreadPoolExecutor;
+import org.zy.moonstone.core.util.ExceptionUtils;
+import org.zy.moonstone.core.util.collections.SynchronizedStack;
+import org.zy.moonstone.core.util.net.Acceptor.AcceptorState;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -7,26 +17,8 @@ import java.net.InetSocketAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.nio.channels.SelectionKey;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.Executor;
-import java.util.concurrent.RejectedExecutionException;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-
-import org.slf4j.Logger;
-import org.zy.moonStone.core.interfaces.connector.ProtocolHandler;
-import org.zy.moonStone.core.threads.LimitLatch;
-import org.zy.moonStone.core.threads.TaskQueue;
-import org.zy.moonStone.core.threads.TaskThreadFactory;
-import org.zy.moonStone.core.threads.ThreadPoolExecutor;
-import org.zy.moonStone.core.util.ExceptionUtils;
-import org.zy.moonStone.core.util.collections.SynchronizedStack;
-import org.zy.moonStone.core.util.net.Acceptor.AcceptorState;
+import java.util.*;
+import java.util.concurrent.*;
 
 /**
  * @dateTime 2022年1月12日;
@@ -281,7 +273,7 @@ public abstract class AbstractEndpoint<S,U> {
 					OutputStreamWriter sw;
 
 					sw = new OutputStreamWriter(s.getOutputStream(), "ISO-8859-1");
-					sw.write("OPTIONS * HTTP/1.0\r\n" + "User-Agent: MoonStone 唤醒连接\r\n\r\n");
+					sw.write("OPTIONS * HTTP/1.0\r\n" + "User-Agent: moonstone 唤醒连接\r\n\r\n");
 					sw.flush();
 				}
 				if (getLogger().isDebugEnabled()) {
@@ -431,7 +423,7 @@ public abstract class AbstractEndpoint<S,U> {
     }
 
     /**
-     * 启动 {@link Acceptor MoonStone接收器} 
+     * 启动 {@link Acceptor moonstone接收器} 
      */
     protected void startAcceptorThread() {
         acceptor = new Acceptor<>(this);

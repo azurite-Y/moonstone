@@ -1,33 +1,24 @@
-package org.zy.moonStone.core.servlets;
+package org.zy.moonstone.core.servlets;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.zy.moonstone.core.Constants;
+import org.zy.moonstone.core.Globals;
+import org.zy.moonstone.core.interfaces.webResources.WebResource;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceRoot;
+import org.zy.moonstone.core.servlets.function.HttpServletServiceCallback;
+import org.zy.moonstone.core.servlets.function.HttpServletServiceGetCallback;
+import org.zy.moonstone.core.servlets.function.HttpServletServicePostCallback;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.UnavailableException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.Constants;
-import org.zy.moonStone.core.Globals;
-import org.zy.moonStone.core.interfaces.webResources.WebResource;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceRoot;
-import org.zy.moonStone.core.servlets.function.HttpServletServiceCallback;
-import org.zy.moonStone.core.servlets.function.HttpServletServiceGetCallback;
-import org.zy.moonStone.core.servlets.function.HttpServletServicePostCallback;
+import javax.servlet.http.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.util.*;
 
 /**
  * @dateTime 2022年12月3日;
@@ -40,22 +31,7 @@ import org.zy.moonStone.core.servlets.function.HttpServletServicePostCallback;
  * 此servlet旨在映射到<em>/</em>
  * 
  * <p>
- * 它可以映射到子路径，但是在所有情况下，资源都是使用来自web应用程序上下文根的完整路径从web应用程序资源根提供的。
- * <br>例如，给定web应用程序结构:
- *</p>
- * <pre>
- * /context
- *   /images
- *     image1.jpg
- *   /static
- *     /images
- *       image2.jpg
- * </pre>
- * <p>
- * ... 和一个servlet映射，该映射仅将 <code>/static/*</code> 映射到默认servlet
- * 
- * <p>
- * 然后请求 <code>/content/static/images/image2.jpg</code> 将成功，而对 <code>/context/images/image1.jpg</code> 的请求将失败。
+ * 它可以映射到子路径，但是在所有情况下，资源都是使用来自web应用程序上下文根的完整路径从web应用程序资源根提供的。该映射仅将 <code>/static/*</code> 映射到默认servlet
  */
 public class DefaultServlet extends HttpServlet {
 	private static final Logger logger = LoggerFactory.getLogger(DefaultServlet.class);
@@ -150,7 +126,7 @@ public class DefaultServlet extends HttpServlet {
 			WebResource resource = this.resources.getResource(path);
 			if (resource.exists()) {
 				/*
-				 * 参见 org.zy.moonStone.core.connector.HttpResponse#isAppCommitted() 
+				 * 参见 org.zy.moonstone.core.connector.HttpResponse#isAppCommitted() 
 				 * 设置了ContentLength之后就视为请求已提交。故而在此首先设置ContentType
 				 */
 				response.setContentType(resource.getMimeType());
@@ -165,7 +141,7 @@ public class DefaultServlet extends HttpServlet {
 			servletMapping.getGetCallback().doGet(request, response);
 			return ;
 		} else if (servletMapping.getCallback() != null) {
-			servletMapping.getCallback.doGet(request, response);
+			servletMapping.callback.doGet(request, response);
 			return ;
 		}
 		
@@ -223,8 +199,8 @@ public class DefaultServlet extends HttpServlet {
 	}
 	
 	private void initServletMapping() {
-		ServletMapping headImg = new ServletMapping("/head.jpg", true);
-		servletStaticResourceMapping.put("/head.jpg", headImg);
+//		ServletMapping headImg = new ServletMapping("/head.jpg", true);
+//		servletStaticResourceMapping.put("/head.jpg", headImg);
 		
 		//--
 		ServletMapping cookies = new ServletMapping("/cookies", true);
@@ -332,12 +308,10 @@ public class DefaultServlet extends HttpServlet {
 		fileDownloadInclude.setCallback(new HttpServletServiceCallback() {
 			@Override
 			public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-				req.setAttribute("includeKey", "fileDownloadInclude-value");
-				
 				if (logger.isDebugEnabled()) {
-					logger.debug("URI: [/redirectToFileDownload], Set Attribute: [includeKey]");
+					logger.debug("URI: [/include/fileDownload], Attribute: [{}]", req.getAttribute("includeKey"));
 				}
-				resp.getWriter().print("[fileDownloadInclude] Running");				
+				resp.getWriter().print("[includeFileDownload] Running");				
 			}
 		});
 		
@@ -348,13 +322,12 @@ public class DefaultServlet extends HttpServlet {
 		requestIncludeDispatcher.setCallback(new HttpServletServiceCallback() {
 			@Override
 			public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-				req.getRequestDispatcher("/include/fileDownload").include(req, resp);
-				
-				Object attribute = req.getAttribute("includeKey");
+				req.setAttribute("includeKey", "fileDownloadInclude-value");
 				if (logger.isDebugEnabled()) {
-					logger.debug("URI: [{}], Get Attribute. name: [{}], value: [{}]", req.getRequestURI(), "includeKey", attribute);
+					logger.debug("URI: [{}] , include URI: [{}], Set Attribute: [{}]", req.getRequestURI(), "/include/fileDownload", "includeKey");
 				}
-				resp.getWriter().print("[RequestDispatcherIncludeTest] Running");				
+				
+				req.getRequestDispatcher("/include/fileDownload").include(req, resp);
 			}
 		});
 	}

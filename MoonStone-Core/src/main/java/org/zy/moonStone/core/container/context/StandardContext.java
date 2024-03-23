@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.container.context;
+package org.zy.moonstone.core.container.context;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,44 +52,44 @@ import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionIdListener;
 import javax.servlet.http.HttpSessionListener;
 
-import org.zy.moonStone.core.Globals;
-import org.zy.moonStone.core.LifecycleState;
-import org.zy.moonStone.core.container.ContainerBase;
-import org.zy.moonStone.core.container.StandardHost;
-import org.zy.moonStone.core.container.StandardWrapper;
-import org.zy.moonStone.core.container.valves.StandardContextValve;
-import org.zy.moonStone.core.exceptions.LifecycleException;
-import org.zy.moonStone.core.filter.ApplicationFilterConfig;
-import org.zy.moonStone.core.filter.FilterDef;
-import org.zy.moonStone.core.filter.FilterMap;
-import org.zy.moonStone.core.interfaces.InstanceManager;
-import org.zy.moonStone.core.interfaces.container.Container;
-import org.zy.moonStone.core.interfaces.container.ContainerListener;
-import org.zy.moonStone.core.interfaces.container.Context;
-import org.zy.moonStone.core.interfaces.container.Lifecycle;
-import org.zy.moonStone.core.interfaces.container.LifecycleListener;
-import org.zy.moonStone.core.interfaces.container.Wrapper;
-import org.zy.moonStone.core.interfaces.http.CookieProcessor;
-import org.zy.moonStone.core.interfaces.loader.Loader;
-import org.zy.moonStone.core.interfaces.loader.ThreadBindingListener;
-import org.zy.moonStone.core.interfaces.webResources.WebResource;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceRoot;
-import org.zy.moonStone.core.loaer.WebappLoader;
-import org.zy.moonStone.core.security.PrivilegedContextClassLoaderGetter;
-import org.zy.moonStone.core.security.PrivilegedContextClassLoaderSetter;
-import org.zy.moonStone.core.session.StandardManager;
-import org.zy.moonStone.core.session.interfaces.Manager;
-import org.zy.moonStone.core.util.CharsetMapper;
-import org.zy.moonStone.core.util.ContextName;
-import org.zy.moonStone.core.util.ErrorPageSupport;
-import org.zy.moonStone.core.util.ExceptionUtils;
-import org.zy.moonStone.core.util.InstanceManagerBindings;
-import org.zy.moonStone.core.util.IntrospectionUtils;
-import org.zy.moonStone.core.util.SimpleInstanceManager;
-import org.zy.moonStone.core.util.compat.JreCompat;
-import org.zy.moonStone.core.util.descriptor.ErrorPage;
-import org.zy.moonStone.core.util.http.Rfc6265CookieProcessor;
-import org.zy.moonStone.core.webResources.StandardRoot;
+import org.zy.moonstone.core.Globals;
+import org.zy.moonstone.core.LifecycleState;
+import org.zy.moonstone.core.container.ContainerBase;
+import org.zy.moonstone.core.container.StandardHost;
+import org.zy.moonstone.core.container.StandardWrapper;
+import org.zy.moonstone.core.container.valves.StandardContextValve;
+import org.zy.moonstone.core.exceptions.LifecycleException;
+import org.zy.moonstone.core.filter.ApplicationFilterConfig;
+import org.zy.moonstone.core.filter.FilterDef;
+import org.zy.moonstone.core.filter.FilterMap;
+import org.zy.moonstone.core.interfaces.InstanceManager;
+import org.zy.moonstone.core.interfaces.container.Container;
+import org.zy.moonstone.core.interfaces.container.ContainerListener;
+import org.zy.moonstone.core.interfaces.container.Context;
+import org.zy.moonstone.core.interfaces.container.Lifecycle;
+import org.zy.moonstone.core.interfaces.container.LifecycleListener;
+import org.zy.moonstone.core.interfaces.container.Wrapper;
+import org.zy.moonstone.core.interfaces.http.CookieProcessor;
+import org.zy.moonstone.core.interfaces.loader.Loader;
+import org.zy.moonstone.core.interfaces.loader.ThreadBindingListener;
+import org.zy.moonstone.core.interfaces.webResources.WebResource;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceRoot;
+import org.zy.moonstone.core.loaer.WebappLoader;
+import org.zy.moonstone.core.security.PrivilegedContextClassLoaderGetter;
+import org.zy.moonstone.core.security.PrivilegedContextClassLoaderSetter;
+import org.zy.moonstone.core.session.StandardManager;
+import org.zy.moonstone.core.session.interfaces.Manager;
+import org.zy.moonstone.core.util.CharsetMapper;
+import org.zy.moonstone.core.util.ContextName;
+import org.zy.moonstone.core.util.ErrorPageSupport;
+import org.zy.moonstone.core.util.ExceptionUtils;
+import org.zy.moonstone.core.util.InstanceManagerBindings;
+import org.zy.moonstone.core.util.IntrospectionUtils;
+import org.zy.moonstone.core.util.SimpleInstanceManager;
+import org.zy.moonstone.core.util.compat.JreCompat;
+import org.zy.moonstone.core.util.descriptor.ErrorPage;
+import org.zy.moonstone.core.util.http.Rfc6265CookieProcessor;
+import org.zy.moonstone.core.webResources.StandardRoot;
 
 /**
  * @dateTime 2022年1月6日;
@@ -156,7 +156,7 @@ public class StandardContext extends ContainerBase implements Context {
 	/**
 	 * 要创建的 CharsetMapper 类的 Java 类名.
 	 */
-	private String charsetMapperClass = "org.zy.moonStone.core.util.CharsetMapper";
+	private String charsetMapperClass = "org.zy.moonstone.core.util.CharsetMapper";
 
 	/**
 	 * 此上下文的 配置文件描述符的 URL.
@@ -391,7 +391,7 @@ public class StandardContext extends ContainerBase implements Context {
 	private boolean clearReferencesStopThreads = false;
 
 	/**
-	 * 是否应该尝试终止任何已由 Web 应用程序启动的{@link java.util.TimerThread}s？ 如果未指定, 将使用默认值 false
+	 * 是否应该尝试终止任何已由 Web 应用程序启动的{@link java.util.TimerThread }s？ 如果未指定, 将使用默认值 false
 	 */
 	private boolean clearReferencesStopTimerThreads = false;
 
@@ -510,7 +510,7 @@ public class StandardContext extends ContainerBase implements Context {
 
 	/**
 	 * 如果这个web应用程序已经启动了一个HttpClient保持活动计时器线程，并且仍然在运行，
-	 * MoonStone 是否应该将上下文类加载器从当前的 {@link ClassLoader} 更改为 {@link ClassLoader#getParent()} 以防止内存泄漏？
+	 * moonstone 是否应该将上下文类加载器从当前的 {@link ClassLoader} 更改为 {@link ClassLoader#getParent()} 以防止内存泄漏？
 	 * 请注意，一旦keep-alive超时，keep-alive计时器线程将自动停止，但是在一个繁忙的系统上，这可能在一段时间内都不会发生。
 	 */
 	private boolean clearReferencesHttpClientKeepAliveThread = true;
@@ -1063,7 +1063,7 @@ public class StandardContext extends ContainerBase implements Context {
 			this.path = this.path.substring(0, this.path.length() - 1);
 		}
 		if (invalid) {
-			logger.warn("指定的上下文路径无效, by parg: {}, 更正为: ", path, this.path);
+			logger.warn("指定的上下文路径无效, by parg: {}, 更正为: {}", path, this.path);
 		}
 		encodedPath = this.path;
 		if (getName() == null) {

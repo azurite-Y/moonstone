@@ -1,8 +1,8 @@
-package org.zy.moonStone.core.interfaces.connector;
+package org.zy.moonstone.core.interfaces.connector;
 
 import java.util.concurrent.TimeUnit;
 
-import org.zy.moonStone.core.interfaces.container.Lifecycle;
+import org.zy.moonstone.core.interfaces.container.Lifecycle;
 
 /**
  * @dateTime 2022年1月1日;

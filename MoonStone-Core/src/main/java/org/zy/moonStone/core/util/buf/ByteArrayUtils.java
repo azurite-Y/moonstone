@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.util.buf;
+package org.zy.moonstone.core.util.buf;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class ByteArrayUtils {
 	
 	/**
 	 * 字节容器转换为字节数组
-	 * @param lineByteList
+	 * @param byteArray
 	 * @return
 	 */
 	public static List<Byte> getList(byte[] byteArray) {

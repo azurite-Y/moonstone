@@ -1,21 +1,16 @@
-package org.zy.moonStone.core.servlets;
+package org.zy.moonstone.core.servlets;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import org.zy.moonstone.core.LifecycleState;
+import org.zy.moonstone.core.interfaces.container.Context;
+import org.zy.moonstone.core.interfaces.container.Wrapper;
+import org.zy.moonstone.core.util.ParameterMap;
 
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration;
 import javax.servlet.ServletSecurityElement;
-
-import org.zy.moonStone.core.LifecycleState;
-import org.zy.moonStone.core.interfaces.container.Context;
-import org.zy.moonStone.core.interfaces.container.Wrapper;
-import org.zy.moonStone.core.util.ParameterMap;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.*;
 
 /**
  * @dateTime 2022年9月29日;
@@ -244,7 +239,7 @@ public class ApplicationServletRegistration implements ServletRegistration.Dynam
 	 * <p>
 	 * 对此方法的调用将覆盖以前的任何设置。
 	 * 
-	 * @param isAsyncSupported - 如果此动态注册表示的Servlet或筛选器支持异步操作，则为true，否则为false
+	 * @param asyncSupported - 如果此动态注册表示的Servlet或筛选器支持异步操作，则为true，否则为false
 	 */
 	@Override
 	public void setAsyncSupported(boolean asyncSupported) {

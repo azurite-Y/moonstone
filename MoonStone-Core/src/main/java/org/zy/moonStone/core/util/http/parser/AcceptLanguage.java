@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.util.http.parser;
+package org.zy.moonstone.core.util.http.parser;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,7 +38,6 @@ public class AcceptLanguage {
      * 解析 accept-language 请求值
      *
      * @param acceptLanguageValue - 解析的 accept-language 头值
-     * @param locales - 解析的结果
      */
 	public static List<AcceptLanguage> parse(String acceptLanguageValue) throws IOException {
         List<AcceptLanguage> result = new ArrayList<>();

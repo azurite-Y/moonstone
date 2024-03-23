@@ -1,23 +1,15 @@
-package org.zy.moonStone.core.http;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.regex.Pattern;
+package org.zy.moonstone.core.http;
 
 import org.apache.commons.lang3.StringUtils;
-import org.zy.moonStone.core.Constants;
-import org.zy.moonStone.core.connector.CompressionConfig;
-import org.zy.moonStone.core.interfaces.connector.Processor;
-import org.zy.moonStone.core.interfaces.connector.UpgradeProtocol;
-import org.zy.moonStone.core.util.net.AbstractEndpoint;
+import org.zy.moonstone.core.Constants;
+import org.zy.moonstone.core.connector.CompressionConfig;
+import org.zy.moonstone.core.interfaces.connector.Processor;
+import org.zy.moonstone.core.interfaces.connector.UpgradeProtocol;
+import org.zy.moonstone.core.util.net.AbstractEndpoint;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Pattern;
 
 /**
  * @dateTime 2022年1月11日;
@@ -105,7 +97,7 @@ public abstract class AbstractHttp11Protocol<S> extends AbstractProtocol<S> {
 
 	private boolean allowHostHeaderMismatch = false;
 	/**
-	 * 如果Host头与请求行中指定的主机不一致(如果有的话)，MoonStone 会接受HTTP 1.1请求吗?
+	 * 如果Host头与请求行中指定的主机不一致(如果有的话)，moonstone 会接受HTTP 1.1请求吗?
 	 *
 	 * @return 如果Tomcat允许此类请求，则为true，否则为false  if Tomcat will allow such requests, otherwise
 	 *         {@code false}
@@ -114,7 +106,7 @@ public abstract class AbstractHttp11Protocol<S> extends AbstractProtocol<S> {
 		return allowHostHeaderMismatch;
 	}
 	/**
-	 * 如果主机头与请求行中指定的主机不一致(如果有的话)，MoonStone 会接受HTTP 1.1请求吗?
+	 * 如果主机头与请求行中指定的主机不一致(如果有的话)，moonstone 会接受HTTP 1.1请求吗?
 	 *
 	 * @param allowHostHeaderMismatch - {@code true} 表示允许这样的请求，{@code false} 表示用400拒绝它们
 	 */
@@ -407,11 +399,11 @@ public abstract class AbstractHttp11Protocol<S> extends AbstractProtocol<S> {
 
 
 	/**
-	 * 可通过内部 MoonStone 支持通过HTTP升级进行访问的协议。
+	 * 可通过内部 moonstone 支持通过HTTP升级进行访问的协议。
 	 */
 	private final Map<String,UpgradeProtocol> httpUpgradeProtocols = new HashMap<>();
 	/**
-	 * 可通过内部 MoonStone 支持通过ALPN协商进行访问的协议。
+	 * 可通过内部 moonstone 支持通过ALPN协商进行访问的协议。
 	 */
 	private final Map<String,UpgradeProtocol> negotiatedProtocols = new HashMap<>();
 	private void configureUpgradeProtocol(UpgradeProtocol upgradeProtocol) {

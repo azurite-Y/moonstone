@@ -1,9 +1,9 @@
-package org.zy.moonStone.core;
+package org.zy.moonstone.core;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-import org.zy.moonStone.core.exceptions.LifecycleException;
+import org.zy.moonstone.core.exceptions.LifecycleException;
 
 /**
  * @dateTime 2022年1月5日;
@@ -39,33 +39,33 @@ public final class Globals {
 	/**
 	 * 异步支持属性
 	 */
-	public static final String ASYNC_SUPPORTED_ATTR = "org.zy.moonStone.core.ASYNC_SUPPORTED";
+	public static final String ASYNC_SUPPORTED_ATTR = "org.zy.moonstone.core.ASYNC_SUPPORTED";
 
 	/**
 	 * 请求调度程序路径.
 	 */
-	public static final String DISPATCHER_REQUEST_PATH_ATTR = "org.zy.moonStone.core.DISPATCHER_REQUEST_PATH";
+	public static final String DISPATCHER_REQUEST_PATH_ATTR = "org.zy.moonstone.core.DISPATCHER_REQUEST_PATH";
 
 	/**
 	 * 请求调度程序状态.
 	 */
-	public static final String DISPATCHER_TYPE_ATTR = "org.zy.moonStone.core.DISPATCHER_TYPE";
+	public static final String DISPATCHER_TYPE_ATTR = "org.zy.moonstone.core.DISPATCHER_TYPE";
 
 	 /** 
 	  * 与上下文关联的WebResourceRoot。这可以用于操作静态文件
 	  */
-    public static final String RESOURCES_ATTR = "org.zy.moonStone.core.resources";
+    public static final String RESOURCES_ATTR = "org.zy.moonstone.core.resources";
     
     /**
-     * 在 {@link #initInternal()}, {@link #startInternal()}, {@link LifecycleException}  {@link #stopInternal()} 或 {@link #destroyInternal()} 期间抛出的LifecycleException是否会被重新抛出，
+     * 在 {@link #initInternal()}, {@link #startInternal()}, {@link LifecycleException}  {@link #stopInternal()} 或 {@link #destroyInternal()} 期间抛出的 LifecycleException 是否会被重新抛出，
      * 以便调用者处理，或者是否会被记录. 默认值为true
      */
-    public  static final String THROW_ON_FAILURE = "org.zy.moonStone.core.EXIT_ON_INIT_FAILURE";
+    public  static final String THROW_ON_FAILURE = "org.zy.moonstone.core.EXIT_ON_INIT_FAILURE";
 
     /**
      * servlet上下文属性，在该属性下存储应用程序类加载器的类路径(作为String类型的对象)，用该平台的适当路径分隔符分隔。
      */
-    public static final String CLASS_PATH_ATTR =  "org.zy.moonStone.classpath";
+    public static final String CLASS_PATH_ATTR =  "org.zy.moonstone.classpath";
     
 	// --------------------------------------------------------------------------
 	// 属性常量
@@ -73,7 +73,7 @@ public final class Globals {
 	/**
 	 * 服务器名称
 	 */
-	public static final String WEB_APPLICATION_NAME = "MoonStone";
+	public static final String WEB_APPLICATION_NAME = "moonstone";
 	/**
 	 * 服务器Home路径系统属性名
 	 */
@@ -134,32 +134,32 @@ public final class Globals {
     /**
      * 如果连接器处理此请求支持使用 sendfile，则设置为 Boolean.TRUE 值的请求属性名
      */
-    public static final String SENDFILE_SUPPORTED_ATTR = "org.zy.moonStone.sendfile.support";
+    public static final String SENDFILE_SUPPORTED_ATTR = "org.zy.moonstone.sendfile.support";
 
     /**
      * servlet 可以使用的 request 属性将 sendfile 提供的文件的名称传递给连接器。 该值应该是 {@code java.lang.String} 类型，即要提供的文件的 {@code File.getCanonicalPath()}
      */
-    public static final String SENDFILE_FILENAME_ATTR = "org.zy.moonStone.sendfile.filename";
+    public static final String SENDFILE_FILENAME_ATTR = "org.zy.moonstone.sendfile.filename";
 
     /**
      * servlet 可以使用的请求属性，用于将 sendfile 提供的文件部分的起始偏移量传递给连接器。 该值应为 {@code java.lang.Long} 类型。 要提供完整的文件，值应该是 {@code Long.valueOf(0)}
      */
-    public static final String SENDFILE_FILE_START_ATTR = "org.zy.moonStone.sendfile.start";
+    public static final String SENDFILE_FILE_START_ATTR = "org.zy.moonstone.sendfile.start";
 
     /**
      * servlet 可以使用的请求属性，用于将 sendfile 提供的文件部分的结束偏移量（不包括）传递给连接器。 该值应为 {@code java.lang.Long} 类型。 要提供完整的文件，该值应等于文件的长度
      */
-    public static final String SENDFILE_FILE_END_ATTR = "org.zy.moonStone.sendfile.end";
+    public static final String SENDFILE_FILE_END_ATTR = "org.zy.moonstone.sendfile.end";
 
     /**
      * 请求属性由RemoteIpFilter, RemoteIpValve设置(也可能由其他类似组件设置)，当一个请求通过一个或多个代理接收时，标识声称与该请求相关联的连接器的远程IP地址。它通常是通过X-Forwarded-For HTTP报头提供的
      */
-    public static final String REMOTE_ADDR_ATTRIBUTE = "org.zy.moonStone.remoteAddr";
+    public static final String REMOTE_ADDR_ATTRIBUTE = "org.zy.moonstone.remoteAddr";
     
     /**
      * HTTP 格式日期缓存数
      */
-    public static final String  HTTP_DATE_FORMAT_CACHE_SIZE= "org.zy.moonStone.util.http.FastHttpDateFormat.CACHE_SIZE";
+    public static final String  HTTP_DATE_FORMAT_CACHE_SIZE= "org.zy.moonstone.util.http.FastHttpDateFormat.CACHE_SIZE";
 
     
 	// --------------------------------------------------------------------------
@@ -186,7 +186,7 @@ public final class Globals {
     public static final String SSL_SESSION_ID_ATTR = "javax.servlet.request.ssl_session_id";
 
     /**
-     * 会话管理器的请求属性键。这是 MoonStone 对 Servlet 规范的扩展。
+     * 会话管理器的请求属性键。这是 moonstone 对 Servlet 规范的扩展。
      */
     public static final String SSL_SESSION_MGR_ATTR = "javax.servlet.request.ssl_session_mgr";
 

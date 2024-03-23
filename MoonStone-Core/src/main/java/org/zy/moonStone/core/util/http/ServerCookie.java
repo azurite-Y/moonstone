@@ -1,13 +1,13 @@
-package org.zy.moonStone.core.util.http;
+package org.zy.moonstone.core.util.http;
+
+import org.zy.moonstone.core.util.buf.MessageBytes;
 
 import java.io.Serializable;
-
-import org.zy.moonStone.core.util.buf.MessageBytes;
 
 /**
  * @dateTime 2022年5月11日;
  * @author zy(azurite-Y);
- * @description 服务器端cookie表示。允许循环使用，并使用MessageBytes作为低级表示（因此字节->字符转换可以延迟，直到知道字符集为止）。MoonStone 使用这个可回收的对象来表示cookie，facade将其转换为外部表示。
+ * @description 服务器端cookie表示。允许循环使用，并使用MessageBytes作为低级表示（因此字节->字符转换可以延迟，直到知道字符集为止）。moonstone 使用这个可回收的对象来表示cookie，facade将其转换为外部表示。
  */
 public class ServerCookie implements Serializable {
 	private static final long serialVersionUID = -3535693131076731466L;

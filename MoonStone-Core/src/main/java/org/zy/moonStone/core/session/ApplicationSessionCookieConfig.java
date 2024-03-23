@@ -1,11 +1,11 @@
-package org.zy.moonStone.core.session;
+package org.zy.moonstone.core.session;
+
+import org.zy.moonstone.core.LifecycleState;
+import org.zy.moonstone.core.container.context.StandardContext;
+import org.zy.moonstone.core.interfaces.container.Context;
 
 import javax.servlet.SessionCookieConfig;
 import javax.servlet.http.Cookie;
-
-import org.zy.moonStone.core.LifecycleState;
-import org.zy.moonStone.core.container.context.StandardContext;
-import org.zy.moonStone.core.interfaces.container.Context;
 
 /**
  * @dateTime 2022年5月11日;
@@ -116,7 +116,7 @@ public class ApplicationSessionCookieConfig implements SessionCookieConfig {
 
     /**
      * 设置将分配给代表应用程序创建的任何会话跟踪cookies 的域，该应用程序由从中获取此 SessionCookieConfig 的 ServletContext 表示。
-     * @param comment - 要使用的 cookie 域
+     * @param domain - 要使用的 cookie 域
      */
     @Override
     public void setDomain(String domain) {

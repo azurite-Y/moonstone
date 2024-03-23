@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.interfaces.connector;
+package org.zy.moonstone.core.interfaces.connector;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.ScheduledExecutorService;
@@ -135,11 +135,11 @@ public interface ProtocolHandler {
 	 * 为HTTP/1.1升级或ALPN添加一个新的协议。
 	 * @param upgradeProtocol - 该协议
 	 */
-	void addUpgradeProtocol(UpgradeProtocol upgradeProtocol);
+	void addUpgradeProtocol(org.zy.moonstone.core.interfaces.connector.UpgradeProtocol upgradeProtocol);
 
 	/**
 	 * 返回所有配置的升级协议。
 	 * @return 该协议
 	 */
-	UpgradeProtocol[] findUpgradeProtocols();
+	org.zy.moonstone.core.interfaces.connector.UpgradeProtocol[] findUpgradeProtocols();
 }

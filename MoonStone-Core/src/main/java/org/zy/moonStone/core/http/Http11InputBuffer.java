@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.http;
+package org.zy.moonstone.core.http;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -6,14 +6,14 @@ import java.util.function.Supplier;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.Constants;
-import org.zy.moonStone.core.exceptions.CloseNowException;
-import org.zy.moonStone.core.util.RequestUtil;
-import org.zy.moonStone.core.util.buf.ByteArrayUtils;
-import org.zy.moonStone.core.util.buf.MessageBytes;
-import org.zy.moonStone.core.util.http.MimeHeaders;
-import org.zy.moonStone.core.util.net.SocketWrapperBase;
-import org.zy.moonStone.core.util.net.interfaces.InputBuffer;
+import org.zy.moonstone.core.Constants;
+import org.zy.moonstone.core.exceptions.CloseNowException;
+import org.zy.moonstone.core.util.RequestUtil;
+import org.zy.moonstone.core.util.buf.ByteArrayUtils;
+import org.zy.moonstone.core.util.buf.MessageBytes;
+import org.zy.moonstone.core.util.http.MimeHeaders;
+import org.zy.moonstone.core.util.net.SocketWrapperBase;
+import org.zy.moonstone.core.util.net.interfaces.InputBuffer;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
@@ -84,7 +84,6 @@ public class Http11InputBuffer implements InputBuffer {
 		this.headerValueBufferSize = headerValueBufferSize;
         this.byteBuf = ByteBufAllocator.DEFAULT.buffer(1024, maxHttpHeaderSize);
         this.byteBuffer = ByteBuffer.allocate(8192);
-
 	}
 
 
@@ -133,12 +132,15 @@ public class Http11InputBuffer implements InputBuffer {
 			while (byteBuffer.hasRemaining()) {
 				readding = requestBufferEnhanceHanlder.readAndParseRequestBytes(byteBuffer.get());
 				if (!readding) {
-					// 不在此处理缓冲区，当前缓冲区可能还留有未读取的请求体数据
+					// 不继续处理缓冲区数据
 					break basic;
 				}
-			} 
+			}
+			// 清空请求报文缓冲区，再此清空之后方便继续读取之后的请求报文
 			byteBuffer.clear();
 		}
+		
+		byteBuf.clear();
 		if ( logger.isDebugEnabled() ) {
 			logger.debug("Request Header: \n{}", requestHeaderBuilder.toString().trim());
 		}
@@ -176,8 +178,6 @@ public class Http11InputBuffer implements InputBuffer {
 	
 	/**
 	 * 延迟读取请求体数据
-	 * 
-	 * @param firstBodyByte - 已从流中读取到的第一个请求体数据
 	 */
 	void deferredReadRequestBody() {
 		if (logger.isDebugEnabled()) {
@@ -346,7 +346,6 @@ public class Http11InputBuffer implements InputBuffer {
 					deferredReadRequestBody();
 				}
 				return false;
-				
 			} else if (parsedLine > 1 && readData != Constants.LF  && readData != Constants.CR && readData != Constants.SP) { // 只解析请求头中包含冒号的行，且忽略空格、、回车、换行符
 				if (nameByte) {
 					if (readData == Constants.COLON) { // 读取到冒号之后意味着之后的字节是请求头参数值

@@ -1,16 +1,11 @@
-package org.zy.moonStone.core.util.http.parser;
+package org.zy.moonstone.core.util.http.parser;
+
+import org.zy.moonstone.core.interfaces.functions.CallbackHandler;
+import org.zy.moonstone.core.util.ArraysUtils;
 
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.StringTokenizer;
-
-import org.zy.moonStone.core.interfaces.functions.CallbackHandler;
-import org.zy.moonStone.core.util.ArraysUtils;
 
 /**
  * @dateTime 2022年9月21日;
@@ -91,8 +86,6 @@ public class HttpParser {
 	 * 数组数据分割
 	 * 
 	 * @param byteArr - 需分割数组
-	 * @param start - 分割数据开始索引
-	 * @param len - 分割数据结束索引
 	 * @param separator - 字节分隔符
 	 * @param boundary - 字节边界符，根据此边界符对分割后的字符串划分为key与value。如："="
 	 * @return 分割字符串的结果
@@ -106,6 +99,7 @@ public class HttpParser {
 	 * @param byteArr - 需分割数组
 	 * @param start - 分割数据开始索引
 	 * @param len - 分割数据结束索引
+	 * @param charset - 字符串字符集
 	 * @param separator - 字节分隔符
 	 * @param boundary - 字节边界符，根据此边界符对分割后的字符串划分为key与value。如："="
 	 * @return 分割字符串的结果

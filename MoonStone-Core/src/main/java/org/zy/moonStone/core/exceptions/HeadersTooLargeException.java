@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.exceptions;
+package org.zy.moonstone.core.exceptions;
 
 /**
  * @dateTime 2022年6月10日;

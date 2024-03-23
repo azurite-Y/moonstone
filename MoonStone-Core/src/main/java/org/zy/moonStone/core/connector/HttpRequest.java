@@ -1,5 +1,45 @@
-package org.zy.moonStone.core.connector;
+package org.zy.moonstone.core.connector;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.zy.moonstone.core.Globals;
+import org.zy.moonstone.core.exceptions.FileUploadException;
+import org.zy.moonstone.core.exceptions.InvalidContentTypeException;
+import org.zy.moonstone.core.exceptions.SizeException;
+import org.zy.moonstone.core.filter.ApplicationFilterChain;
+import org.zy.moonstone.core.http.Parameters;
+import org.zy.moonstone.core.http.Parameters.FailReason;
+import org.zy.moonstone.core.http.Request;
+import org.zy.moonstone.core.http.async.AsyncContextImpl;
+import org.zy.moonstone.core.http.fileupload.ApplicationPart;
+import org.zy.moonstone.core.http.fileupload.DiskFileItemFactory;
+import org.zy.moonstone.core.http.fileupload.ServletFileUpload;
+import org.zy.moonstone.core.http.fileupload.ServletRequestContext;
+import org.zy.moonstone.core.interfaces.container.Container;
+import org.zy.moonstone.core.interfaces.container.Context;
+import org.zy.moonstone.core.interfaces.container.Host;
+import org.zy.moonstone.core.interfaces.container.Wrapper;
+import org.zy.moonstone.core.interfaces.http.CookieProcessor;
+import org.zy.moonstone.core.interfaces.http.fileupload.FileItem;
+import org.zy.moonstone.core.mapper.ApplicationMapping;
+import org.zy.moonstone.core.mapper.MappingData;
+import org.zy.moonstone.core.session.ApplicationSessionCookieConfig;
+import org.zy.moonstone.core.session.interfaces.Manager;
+import org.zy.moonstone.core.session.interfaces.Session;
+import org.zy.moonstone.core.util.ExceptionUtils;
+import org.zy.moonstone.core.util.ParameterMap;
+import org.zy.moonstone.core.util.RequestUtil;
+import org.zy.moonstone.core.util.TLSUtil;
+import org.zy.moonstone.core.util.buf.MessageBytes;
+import org.zy.moonstone.core.util.http.ActionCode;
+import org.zy.moonstone.core.util.http.FastHttpDateFormat;
+import org.zy.moonstone.core.util.http.ServerCookie;
+import org.zy.moonstone.core.util.http.ServerCookies;
+import org.zy.moonstone.core.util.http.parser.AcceptLanguage;
+import org.zy.moonstone.core.util.net.interfaces.SSLSupport;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -7,84 +47,15 @@ import java.net.URLEncoder;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
-import javax.servlet.AsyncContext;
-import javax.servlet.DispatcherType;
-import javax.servlet.FilterChain;
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletRequestAttributeEvent;
-import javax.servlet.ServletRequestAttributeListener;
-import javax.servlet.ServletResponse;
-import javax.servlet.SessionTrackingMode;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpUpgradeHandler;
-import javax.servlet.http.Part;
-import javax.servlet.http.PushBuilder;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.Globals;
-import org.zy.moonStone.core.exceptions.FileUploadException;
-import org.zy.moonStone.core.exceptions.InvalidContentTypeException;
-import org.zy.moonStone.core.exceptions.SizeException;
-import org.zy.moonStone.core.filter.ApplicationFilterChain;
-import org.zy.moonStone.core.http.Parameters;
-import org.zy.moonStone.core.http.Parameters.FailReason;
-import org.zy.moonStone.core.http.Request;
-import org.zy.moonStone.core.http.async.AsyncContextImpl;
-import org.zy.moonStone.core.http.fileupload.ApplicationPart;
-import org.zy.moonStone.core.http.fileupload.DiskFileItemFactory;
-import org.zy.moonStone.core.http.fileupload.ServletFileUpload;
-import org.zy.moonStone.core.http.fileupload.ServletRequestContext;
-import org.zy.moonStone.core.interfaces.container.Container;
-import org.zy.moonStone.core.interfaces.container.Context;
-import org.zy.moonStone.core.interfaces.container.Host;
-import org.zy.moonStone.core.interfaces.container.Wrapper;
-import org.zy.moonStone.core.interfaces.http.CookieProcessor;
-import org.zy.moonStone.core.interfaces.http.fileupload.FileItem;
-import org.zy.moonStone.core.mapper.ApplicationMapping;
-import org.zy.moonStone.core.mapper.MappingData;
-import org.zy.moonStone.core.session.ApplicationSessionCookieConfig;
-import org.zy.moonStone.core.session.interfaces.Manager;
-import org.zy.moonStone.core.session.interfaces.Session;
-import org.zy.moonStone.core.util.ExceptionUtils;
-import org.zy.moonStone.core.util.ParameterMap;
-import org.zy.moonStone.core.util.RequestUtil;
-import org.zy.moonStone.core.util.TLSUtil;
-import org.zy.moonStone.core.util.buf.MessageBytes;
-import org.zy.moonStone.core.util.http.ActionCode;
-import org.zy.moonStone.core.util.http.FastHttpDateFormat;
-import org.zy.moonStone.core.util.http.ServerCookie;
-import org.zy.moonStone.core.util.http.ServerCookies;
-import org.zy.moonStone.core.util.http.parser.AcceptLanguage;
-import org.zy.moonStone.core.util.net.interfaces.SSLSupport;
-
 /**
  * @dateTime 2022年6月16日;
  * @author zy(azurite-Y);
- * @description {@link org.zy.moonStone.core.http.Request } 的包装类
+ * @description {@link org.zy.moonstone.core.http.Request } 的包装类
  */
 public class HttpRequest implements HttpServletRequest {
     private static final Logger logger = LoggerFactory.getLogger(Request.class);
@@ -394,7 +365,7 @@ public class HttpRequest implements HttpServletRequest {
     /**
      * 设置原初请求对象
      *
-     * @param coyoteRequest - 原初请求对象
+     * @param request - 原初请求对象
      */
     public void setRequest(Request request) {
         this.request = request;
@@ -670,7 +641,7 @@ public class HttpRequest implements HttpServletRequest {
 	 * 
 	 * @apiNote 警告当请求从 servlet 分派时，RequestDispatcher 驻留在不同的 Web 应用程序中，此方法设置的对象可能无法在调用方 servlet 中正确检索。
 	 * @param name - 一个字符串，指定属性的名称
-	 * @param o - 要存储的对象
+	 * @param value - 要存储的对象
 	 */
 	@Override
 	public void setAttribute(String name, Object value) {
@@ -709,7 +680,7 @@ public class HttpRequest implements HttpServletRequest {
         Object oldValue = attributes.put(name, value);
 
         // 将特殊属性传递给本地层
-        if (name.startsWith("org.zy.moonStone.")) {
+        if (name.startsWith("org.zy.moonstone.")) {
             request.setAttribute(name, value);
         }
 
@@ -1268,8 +1239,8 @@ public class HttpRequest implements HttpServletRequest {
 	 * <p>
 	 * 此方法或其零参数变量的后续调用将返回相同的 AsyncContext 实例，并根据需要重新初始化。如果调用此方法之后调用其零参数变体，
 	 * 则指定的（并且可能包装的）请求和响应对象将保持锁定在返回的 AsyncContext 中。
-	 * @param servletRequest - 用于初始化 AsyncContext 的 ServletRequest
-	 * @param servletResponse - 用于初始化 AsyncContext 的 ServletResponse
+	 * @param httpServletRequest - 用于初始化 AsyncContext 的 ServletRequest
+	 * @param httpServletResponse - 用于初始化 AsyncContext 的 ServletResponse
 	 * 
 	 * @throws IllegalStateException - 如果此请求在不支持异步操作的过滤器或 servlet 的范围内（即 isAsyncSupported 返回 false），
 	 * 或者如果在没有任何异步调度的情况下再次调用此方法（由 AsyncContext.dispatch 方法之一产生），则为 在任何此类调度的范围之外调用，或者在同一调度的范围内再次调用，或者如果响应已经关闭
@@ -1563,7 +1534,7 @@ public class HttpRequest implements HttpServletRequest {
 	 * <p>
 	 * 一个 servlet 容器可能通过多个上下文路径匹配一个上下文。 
 	 * 在这种情况下，此方法将返回请求使用的实际上下文路径，它可能与 {@link ServletContext#getContextPath()} 方法返回的路径不同。 
-	 * {@link ServletContext.getContextPath() } 返回的上下文路径应该是 被视为应用程序的主要或首选上下文路径。
+	 * {@link ServletContext#getContextPath() } 返回的上下文路径应该是 被视为应用程序的主要或首选上下文路径。
 	 * 
 	 * @return 一个字符串，指定请求 URI 中指示请求上下文的部分
 	 */
@@ -2549,7 +2520,7 @@ public class HttpRequest implements HttpServletRequest {
 	        if (!location.exists() && context.getCreateUploadTargets()) {
 	            logger.warn("容器 [{}] 尝试创建不存在的文件存储目录: {}", getMappingData().wrapper.getName(), location.getAbsolutePath());
 	            if (!location.mkdirs()) {
-	                logger.warn("尝试创建不存在的文件存储目录失败, by: ",location.getAbsolutePath());
+	                logger.warn("尝试创建不存在的文件存储目录失败, by: {}",location.getAbsolutePath());
 	            }
 	        }
 	

@@ -1,4 +1,13 @@
-package org.zy.moonStone.core.http.fileupload;
+package org.zy.moonstone.core.http.fileupload;
+
+import org.zy.moonstone.core.Constants;
+import org.zy.moonstone.core.exceptions.FileUploadException;
+import org.zy.moonstone.core.interfaces.http.fileupload.FileItem;
+import org.zy.moonstone.core.interfaces.http.fileupload.FileItemFactory;
+import org.zy.moonstone.core.interfaces.http.fileupload.FileItemHeaders;
+import org.zy.moonstone.core.interfaces.http.fileupload.RequestContext;
+import org.zy.moonstone.core.util.ArraysUtils;
+import org.zy.moonstone.core.util.http.parser.HttpParser;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -8,15 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Supplier;
-
-import org.zy.moonStone.core.Constants;
-import org.zy.moonStone.core.exceptions.FileUploadException;
-import org.zy.moonStone.core.interfaces.http.fileupload.FileItem;
-import org.zy.moonStone.core.interfaces.http.fileupload.FileItemFactory;
-import org.zy.moonStone.core.interfaces.http.fileupload.FileItemHeaders;
-import org.zy.moonStone.core.interfaces.http.fileupload.RequestContext;
-import org.zy.moonStone.core.util.ArraysUtils;
-import org.zy.moonStone.core.util.http.parser.HttpParser;
 
 /**
  * @dateTime 2022年11月22日;
@@ -69,7 +69,6 @@ public class ServletFileUpload {
      * 构造此类的实例，该实例使用提供的工厂创建 <code>FileItem</code> 实例。
      *
      * @param fileItemFactory - 用于创建 <code>FileItem</code> 的工厂
-     * @see #FileUpload()
      */
     public ServletFileUpload(FileItemFactory fileItemFactory) {
         this.fileItemFactory = fileItemFactory;

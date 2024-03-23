@@ -1,13 +1,13 @@
-package org.zy.moonStone.core.util.net;
+package org.zy.moonstone.core.util.net;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.util.ExceptionUtils;
+import org.zy.moonstone.core.util.ExceptionUtils;
 
 /**
  * @dateTime 2022年1月20日;
  * @author zy(azurite-Y);
- * @description MoonStone 接收器，接受来自服务器套接字的下一个传入连接，如果成功则将套接字交给适当的处理器
+ * @description moonstone 接收器，接受来自服务器套接字的下一个传入连接，如果成功则将套接字交给适当的处理器
  */
 public class Acceptor<U> implements Runnable {
 	private static final Logger logger = LoggerFactory.getLogger(Acceptor.class);

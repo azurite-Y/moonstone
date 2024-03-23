@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.interfaces.container;
+package org.zy.moonstone.core.interfaces.container;
 
 import java.util.Locale;
 import java.util.Set;
@@ -9,15 +9,15 @@ import javax.servlet.ServletRegistration;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletSecurityElement;
 
-import org.zy.moonStone.core.filter.FilterDef;
-import org.zy.moonStone.core.filter.FilterMap;
-import org.zy.moonStone.core.interfaces.InstanceManager;
-import org.zy.moonStone.core.interfaces.http.CookieProcessor;
-import org.zy.moonStone.core.interfaces.loader.Loader;
-import org.zy.moonStone.core.interfaces.loader.ThreadBindingListener;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceRoot;
-import org.zy.moonStone.core.session.interfaces.Manager;
-import org.zy.moonStone.core.util.descriptor.ErrorPage;
+import org.zy.moonstone.core.filter.FilterDef;
+import org.zy.moonstone.core.filter.FilterMap;
+import org.zy.moonstone.core.interfaces.InstanceManager;
+import org.zy.moonstone.core.interfaces.http.CookieProcessor;
+import org.zy.moonstone.core.interfaces.loader.Loader;
+import org.zy.moonstone.core.interfaces.loader.ThreadBindingListener;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceRoot;
+import org.zy.moonstone.core.session.interfaces.Manager;
+import org.zy.moonstone.core.util.descriptor.ErrorPage;
 
 
 /**
@@ -834,7 +834,7 @@ public interface Context extends Container, ContextBind {
 
 	/**
 	 * 调用中用于获取requestdispatcher的路径是否需要编码?<br/>
-	 * 这将影响MoonStone如何处理获取Requestdispatcher的调用，以及MoonStone如何在内部生成用于获取Requestdispatcher的路径.
+	 * 这将影响moonstone如何处理获取Requestdispatcher的调用，以及moonstone如何在内部生成用于获取Requestdispatcher的路径.
 	 *
 	 * @param dispatchersUseEncodedPaths - true表示使用编码路径，否则为false
 	 */
@@ -842,7 +842,7 @@ public interface Context extends Container, ContextBind {
 
 	/**
 	 * 调用中用于获取requestdispatcher的路径是否需要编码?
-	 * 这将影响MoonStone如何处理获取Requestdispatcher的调用，以及MoonStone如何在内部生成用于获取Requestdispatcher的路径.
+	 * 这将影响moonstone如何处理获取Requestdispatcher的调用，以及moonstone如何在内部生成用于获取Requestdispatcher的路径.
 	 *
 	 * @return 如果使用编码过的路径，则为True，否则为false
 	 */
@@ -900,16 +900,16 @@ public interface Context extends Container, ContextBind {
 	public void decrementInProgressAsyncCount();
 
 	/**
-	 * 配置当 Web 应用程序尝试使用它时，如果该 Web 应用程序使用的上传目标不存在，MoonStone 是否会尝试创建它。
+	 * 配置当 Web 应用程序尝试使用它时，如果该 Web 应用程序使用的上传目标不存在，moonstone 是否会尝试创建它。
 	 *
-	 * @param createUploadTargets - 如果 MoonStone 应该尝试创建上传目标，则为 true，否则为 false
+	 * @param createUploadTargets - 如果 moonstone 应该尝试创建上传目标，则为 true，否则为 false
 	 */
 	public void setCreateUploadTargets(boolean createUploadTargets);
 
 	/**
-	 * 如果 Web 应用程序尝试使用它时不存在，MoonStone 是否会尝试创建此 Web 应用程序使用的上传目标？
+	 * 如果 Web 应用程序尝试使用它时不存在，moonstone 是否会尝试创建此 Web 应用程序使用的上传目标？
 	 *
-	 * @return 如果 MoonStone 将尝试创建上载目标，则为true，否则为false
+	 * @return 如果 moonstone 将尝试创建上载目标，则为true，否则为false
 	 */
 	public boolean getCreateUploadTargets();
 

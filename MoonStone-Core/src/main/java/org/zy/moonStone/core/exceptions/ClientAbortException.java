@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.exceptions;
+package org.zy.moonstone.core.exceptions;
 
 import java.io.IOException;
 

@@ -1,7 +1,7 @@
-package org.zy.moonStone.core.interfaces.container;
+package org.zy.moonstone.core.interfaces.container;
 
-import org.zy.moonStone.core.LifecycleState;
-import org.zy.moonStone.core.exceptions.LifecycleException;
+import org.zy.moonstone.core.LifecycleState;
+import org.zy.moonstone.core.exceptions.LifecycleException;
 
 /**
  * @dateTime 2021年12月29日;

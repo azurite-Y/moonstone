@@ -1,11 +1,11 @@
-package org.zy.moonStone.core.util.http;
+package org.zy.moonstone.core.util.http;
+
+import org.zy.moonstone.core.util.buf.MessageBytes;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Enumeration;
-
-import org.zy.moonStone.core.util.buf.MessageBytes;
 
 /**
  * @dateTime 2022年5月11日;
@@ -175,8 +175,8 @@ public class MimeHeaders {
 	/**
 	 * 创建一个新的 MimeHeaderField ，返回新值的 MessageBytes 容器
 	 * 
-	 * @param name The header name
-	 * @return the message bytes container for the value
+	 * @param headName 请求头名称
+	 * @return 该请求头名称对应的值
 	 */
 	public MessageBytes addHeadNameValue(String headName) {
 		MimeHeaderField mh = createHeader();

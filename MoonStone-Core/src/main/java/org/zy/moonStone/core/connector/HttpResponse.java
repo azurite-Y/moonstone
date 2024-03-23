@@ -1,5 +1,29 @@
-package org.zy.moonStone.core.connector;
+package org.zy.moonstone.core.connector;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.zy.moonstone.core.Globals;
+import org.zy.moonstone.core.http.Response;
+import org.zy.moonstone.core.interfaces.container.Context;
+import org.zy.moonstone.core.security.SecurityUtil;
+import org.zy.moonstone.core.session.SessionConfig;
+import org.zy.moonstone.core.session.interfaces.Session;
+import org.zy.moonstone.core.util.RequestUtil;
+import org.zy.moonstone.core.util.buf.CharChunk;
+import org.zy.moonstone.core.util.buf.UriUtil;
+import org.zy.moonstone.core.util.http.ActionCode;
+import org.zy.moonstone.core.util.http.FastHttpDateFormat;
+import org.zy.moonstone.core.util.http.MimeHeaders;
+import org.zy.moonstone.core.util.http.parser.MediaTypeCache;
+import org.zy.moonstone.core.util.security.Escape;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.ServletResponse;
+import javax.servlet.SessionTrackingMode;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -11,40 +35,8 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Supplier;
-
-import javax.servlet.ServletOutputStream;
-import javax.servlet.ServletResponse;
-import javax.servlet.SessionTrackingMode;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.Globals;
-import org.zy.moonStone.core.http.Response;
-import org.zy.moonStone.core.interfaces.container.Context;
-import org.zy.moonStone.core.security.SecurityUtil;
-import org.zy.moonStone.core.session.SessionConfig;
-import org.zy.moonStone.core.session.interfaces.Session;
-import org.zy.moonStone.core.util.RequestUtil;
-import org.zy.moonStone.core.util.buf.CharChunk;
-import org.zy.moonStone.core.util.buf.UriUtil;
-import org.zy.moonStone.core.util.http.ActionCode;
-import org.zy.moonStone.core.util.http.FastHttpDateFormat;
-import org.zy.moonStone.core.util.http.MimeHeaders;
-import org.zy.moonStone.core.util.http.parser.MediaTypeCache;
-import org.zy.moonStone.core.util.security.Escape;
 
 /**
  * @dateTime 2022年6月16日;
@@ -759,7 +751,6 @@ public class HttpResponse implements HttpServletResponse {
 	 * <p>
 	 * 对返回的 <code>Collection</code> 的任何更改都不得影响此 <code>HttpServletResponse</code>。
 	 * 
-	 * @param name - 要返回其值的响应头的名称
 	 * @return 具有给定名称的响应头的值的集合（可能为空）
 	 */
 	@Override
@@ -825,8 +816,8 @@ public class HttpResponse implements HttpServletResponse {
 	}
 
     /**
-     * {@link org.zy.moonStone.core.http.Response} 中存在此的扩展版本。
-     * 此处需要此检查以确保应用 {@link #setContentType(String)} 中的 usingWriter 检查，因为 usingWriter 对 {@link org.zy.moonStone.core.http.Response} 不可见。
+     * {@link org.zy.moonstone.core.http.Response} 中存在此的扩展版本。
+     * 此处需要此检查以确保应用 {@link #setContentType(String)} 中的 usingWriter 检查，因为 usingWriter 对 {@link org.zy.moonstone.core.http.Response} 不可见。
      * <p>
      * 从 set/addHeader 的调用
      * 
@@ -978,7 +969,7 @@ public class HttpResponse implements HttpServletResponse {
 	 */
 	@Override
 	public boolean containsHeader(String name) {
-		// 由于在  org.zy.moonStone.core.http.Response 中对它们进行了特殊处理，因此需要对 Content-Type 和 Content-Length 进行特殊处理
+		// 由于在  org.zy.moonstone.core.http.Response 中对它们进行了特殊处理，因此需要对 Content-Type 和 Content-Length 进行特殊处理
         char cc=name.charAt(0);
         if(cc=='C' || cc=='c') {
             if(name.equalsIgnoreCase("Content-Type")) {
@@ -1023,8 +1014,8 @@ public class HttpResponse implements HttpServletResponse {
 	}
 
 	/**
-	 * @param sc - 错误状态码
-	 * @param msg - 描述性消息
+	 * @param status - 错误状态码
+	 * @param message - 描述性消息
 	 * @deprecated 从 Java Servlet API 的 2.1 版开始，由于 message 参数的含义不明确，此方法已被弃用。
 	 */
 	@Override

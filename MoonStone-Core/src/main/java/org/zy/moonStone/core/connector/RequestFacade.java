@@ -1,5 +1,10 @@
-package org.zy.moonStone.core.connector;
+package org.zy.moonstone.core.connector;
 
+import org.zy.moonstone.core.Globals;
+import org.zy.moonstone.core.security.SecurityUtil;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -9,26 +14,6 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
-
-import javax.servlet.AsyncContext;
-import javax.servlet.DispatcherType;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletInputStream;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletMapping;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpUpgradeHandler;
-import javax.servlet.http.Part;
-import javax.servlet.http.PushBuilder;
-
-import org.zy.moonStone.core.Globals;
-import org.zy.moonStone.core.security.SecurityUtil;
 
 /**
  * @dateTime 2022年6月29日;
@@ -47,7 +32,7 @@ public class RequestFacade implements HttpServletRequest {
     /**
      * 为指定的请求构造一个包装器
      *
-     * @param request - 要包装的请求
+     * @param httpRequest - 要包装的请求
      */
     public RequestFacade(HttpRequest httpRequest) {
         if (httpRequest == null) {
@@ -186,7 +171,6 @@ public class RequestFacade implements HttpServletRequest {
 	 * <p>
 	 * 如果参数数据是在请求体中发送的，例如发生在 HTTP POST 请求中，那么直接通过 getInputStream 或 getReader 读取请求体会干扰该方法的执行。
 	 * 
-	 * @param name - 指定参数名称的字符串
 	 * @return 一个字符串，表示参数的单个值
 	 */
     @Override
@@ -925,8 +909,8 @@ public class RequestFacade implements HttpServletRequest {
 	 * <p>
 	 * 此方法或其零参数变量的后续调用将返回相同的 AsyncContext 实例，并根据需要重新初始化。如果调用此方法之后调用其零参数变体，
 	 * 则指定的（并且可能包装的）请求和响应对象将保持锁定在返回的 AsyncContext 中。
-	 * @param servletRequest - 用于初始化 AsyncContext 的 ServletRequest
-	 * @param servletResponse - 用于初始化 AsyncContext 的 ServletResponse
+	 * @param request - 用于初始化 AsyncContext 的 ServletRequest
+	 * @param response - 用于初始化 AsyncContext 的 ServletResponse
 	 * 
 	 * @throws IllegalStateException - 如果此请求在不支持异步操作的过滤器或 servlet 的范围内（即 isAsyncSupported 返回 false），
 	 * 或者如果在没有任何异步调度的情况下再次调用此方法（由 AsyncContext.dispatch 方法之一产生），则为 在任何此类调度的范围之外调用，或者在同一调度的范围内再次调用，或者如果响应已经关闭
@@ -1100,7 +1084,7 @@ public class RequestFacade implements HttpServletRequest {
 	 * 为给定类创建 HttpUpgradeHandler 的实例，并将其用于 http 协议升级处理。
 	 * 
 	 * @param <T> - 继承handlerClass的HttpUpgradeHandler的类
-	 * @param handlerClass - 用于升级的 HttpUpgradeHandler 类。
+	 * @param httpUpgradeHandlerClass - 用于升级的 HttpUpgradeHandler 类。
 	 * @return HttpUpgradeHandler 的一个实例
 	 * @throws IOException - 如果在升级过程中发生 I/O 错误
 	 * @throws ServletException - 如果给定的 handlerClass 无法实例化

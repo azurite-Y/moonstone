@@ -1,12 +1,12 @@
-package org.zy.moonStone.core.webResources;
+package org.zy.moonstone.core.webResources;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.zy.moonStone.core.interfaces.webResources.TrackedWebResource;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceRoot;
+import org.zy.moonstone.core.interfaces.webResources.TrackedWebResource;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceRoot;
 
 /**
  * @dateTime 2022年4月12日;

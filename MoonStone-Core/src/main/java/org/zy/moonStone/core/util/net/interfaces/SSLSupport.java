@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.util.net.interfaces;
+package org.zy.moonstone.core.util.net.interfaces;
 
 import java.io.IOException;
 import java.security.cert.X509Certificate;
@@ -37,7 +37,7 @@ public interface SSLSupport {
     /**
      * 请求属性键，在此键下记录了创建SSL套接字的协议，例如TLSv1或TLSv1.2等。
      */
-    public static final String PROTOCOL_VERSION_KEY = "org.zy.moonStone.core.util.net.secure_protocol_version";
+    public static final String PROTOCOL_VERSION_KEY = "org.zy.moonstone.core.util.net.secure_protocol_version";
 
     /**
      * 此连接上使用的密码套件

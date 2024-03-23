@@ -1,11 +1,11 @@
-package org.zy.moonStone.core.interfaces.container;
+package org.zy.moonstone.core.interfaces.container;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 
-import org.zy.moonStone.core.connector.HttpRequest;
-import org.zy.moonStone.core.connector.HttpResponse;
+import org.zy.moonstone.core.connector.HttpRequest;
+import org.zy.moonstone.core.connector.HttpResponse;
 
 
 /**
@@ -56,8 +56,8 @@ public interface Valve {
 	 * <li>在getNext().invoke()方法返回后，修改响应中包含的HTTP报头.
 	 * <li>在getNext().invoke()方法返回后，对与指定的Response关联的输出流执行任何操作.
 	 * </ul>
-	 * @param httpRequest - 要处理的servlet请求
-	 * @param httpResponse - 要创建的servlet响应
+	 * @param request - 要处理的servlet请求
+	 * @param response - 要创建的servlet响应
 	 * @exception IOException - 如果输入/输出错误发生，或者由随后调用的阀门、过滤器或Servlet抛出
 	 * @exception ServletException - 如果发生servlet错误，或者被随后调用的阀门、过滤器或servlet抛出
 	 */

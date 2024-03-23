@@ -1,6 +1,6 @@
-package org.zy.moonStone.core.mapper;
+package org.zy.moonstone.core.mapper;
 
-import org.zy.moonStone.core.interfaces.container.Wrapper;
+import org.zy.moonstone.core.interfaces.container.Wrapper;
 
 /**
  * @dateTime 2022年8月16日;

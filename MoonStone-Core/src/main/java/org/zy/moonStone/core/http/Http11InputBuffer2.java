@@ -1,22 +1,21 @@
-package org.zy.moonStone.core.http;
+package org.zy.moonstone.core.http;
+
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
+import org.zy.moonstone.core.Constants;
+import org.zy.moonstone.core.exceptions.CloseNowException;
+import org.zy.moonstone.core.session.SessionConstants;
+import org.zy.moonstone.core.util.RequestUtil;
+import org.zy.moonstone.core.util.buf.ByteArrayUtils;
+import org.zy.moonstone.core.util.buf.MessageBytes;
+import org.zy.moonstone.core.util.http.MimeHeaders;
+import org.zy.moonstone.core.util.net.SocketWrapperBase;
+import org.zy.moonstone.core.util.net.interfaces.InputBuffer;
 
 import java.io.EOFException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.function.Supplier;
-
-import org.zy.moonStone.core.Constants;
-import org.zy.moonStone.core.exceptions.CloseNowException;
-import org.zy.moonStone.core.session.SessionConstants;
-import org.zy.moonStone.core.util.RequestUtil;
-import org.zy.moonStone.core.util.buf.ByteArrayUtils;
-import org.zy.moonStone.core.util.buf.MessageBytes;
-import org.zy.moonStone.core.util.http.MimeHeaders;
-import org.zy.moonStone.core.util.net.SocketWrapperBase;
-import org.zy.moonStone.core.util.net.interfaces.InputBuffer;
-
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
 
 /**
  * @dateTime 2022年6月1日;
@@ -181,8 +180,6 @@ public class Http11InputBuffer2 implements InputBuffer {
 	
 	/**
 	 * 延迟读取请求体数据
-	 * 
-	 * @param firstBodyByte - 已从流中读取到的第一个请求体数据
 	 */
 	void deferredReadRequestBody() {
 //		System.out.println(this.byteBuffer.position());
@@ -706,8 +703,7 @@ public class Http11InputBuffer2 implements InputBuffer {
 		private MimeHeaders mimeHeaders = request.getMimeHeaders();
 
 		/**
-		 * 实例化一个 
-		 * @param bis
+		 * 实例化一个 RequestBufferHanlder
 		 */
 		public RequestBufferHanlder() {
 			super();

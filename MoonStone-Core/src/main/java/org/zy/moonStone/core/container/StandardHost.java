@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.container;
+package org.zy.moonstone.core.container;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,17 +12,17 @@ import java.util.concurrent.ExecutorService;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.zy.moonStone.core.LifecycleEvent;
-import org.zy.moonStone.core.container.valves.StandardHostValve;
-import org.zy.moonStone.core.exceptions.LifecycleException;
-import org.zy.moonStone.core.interfaces.container.Container;
-import org.zy.moonStone.core.interfaces.container.Context;
-import org.zy.moonStone.core.interfaces.container.Host;
-import org.zy.moonStone.core.interfaces.container.Lifecycle;
-import org.zy.moonStone.core.interfaces.container.LifecycleListener;
-import org.zy.moonStone.core.interfaces.container.Valve;
-import org.zy.moonStone.core.loaer.WebappClassLoaderBase;
-import org.zy.moonStone.core.util.ExceptionUtils;
+import org.zy.moonstone.core.LifecycleEvent;
+import org.zy.moonstone.core.container.valves.StandardHostValve;
+import org.zy.moonstone.core.exceptions.LifecycleException;
+import org.zy.moonstone.core.interfaces.container.Container;
+import org.zy.moonstone.core.interfaces.container.Context;
+import org.zy.moonstone.core.interfaces.container.Host;
+import org.zy.moonstone.core.interfaces.container.Lifecycle;
+import org.zy.moonstone.core.interfaces.container.LifecycleListener;
+import org.zy.moonstone.core.interfaces.container.Valve;
+import org.zy.moonstone.core.loaer.WebappClassLoaderBase;
+import org.zy.moonstone.core.util.ExceptionUtils;
 
 /**
  * @dateTime 2022年1月2日;
@@ -57,12 +57,12 @@ public class StandardHost extends ContainerBase implements Host {
     /**
      * 已部署的web应用程序的默认上下文配置类的Java类名.
      */
-    private String configClass = "org.zy.moonStone.core.container.StandardContext";
+    private String configClass = "org.zy.moonstone.core.container.StandardContext";
 
     /**
      * 已部署的web应用程序的默认上下文实现类的Java类名.
      */
-    private String contextClass = "org.zy.moonStone.core.container.context.StandardContext";
+    private String contextClass = "org.zy.moonstone.core.container.context.StandardContext";
 
     /**
      * 此主机的启动时部署标志.
@@ -72,7 +72,7 @@ public class StandardHost extends ContainerBase implements Host {
     /**
      * 已部署的web应用程序的默认错误报告器实现类的Java类名.
      */
-    private String errorReportValveClass = "org.zy.moonStone.core.container.valves.ErrorReportValve";
+    private String errorReportValveClass = "org.zy.moonstone.core.container.valves.ErrorReportValve";
 
     /**
      * 应用程序的基础工作目录.

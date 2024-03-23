@@ -1,4 +1,6 @@
-package org.zy.moonStone.core.util.net;
+package org.zy.moonstone.core.util.net;
+
+import org.zy.moonstone.core.util.net.NioEndpoint.SocketProcessor;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -7,8 +9,6 @@ import java.net.SocketException;
 import java.net.StandardSocketOptions;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
-
-import org.zy.moonStone.core.util.net.NioEndpoint.SocketProcessor;
 
 /**
  * @dateTime 2022年1月12日;
@@ -23,7 +23,7 @@ public class SocketProperties {
 	protected int processorCache = 500;
 
 	/**
-	 * 启用/禁用轮询器事件缓存，这个有界缓存存储 {@link PollerEvent } 对象以减少轮询器的GC。
+	 * 启用/禁用轮询器事件缓存，这个有界缓存存储 {@link NioEndpoint.PollerEvent } 对象以减少轮询器的GC。
 	 * 默认值是500，-1为不作限制，0为被禁用。
 	 */
 	protected int eventCache = 500;

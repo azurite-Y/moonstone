@@ -1,19 +1,19 @@
-package org.zy.moonStone.core.http;
+package org.zy.moonstone.core.http;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.zy.moonstone.core.Constants;
+import org.zy.moonstone.core.exceptions.CloseNowException;
+import org.zy.moonstone.core.exceptions.HeadersTooLargeException;
+import org.zy.moonstone.core.util.buf.ByteChunk;
+import org.zy.moonstone.core.util.buf.MessageBytes;
+import org.zy.moonstone.core.util.http.ActionCode;
+import org.zy.moonstone.core.util.net.SocketWrapperBase;
+import org.zy.moonstone.core.util.net.interfaces.HttpOutputBuffer;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.Constants;
-import org.zy.moonStone.core.exceptions.CloseNowException;
-import org.zy.moonStone.core.exceptions.HeadersTooLargeException;
-import org.zy.moonStone.core.util.buf.ByteChunk;
-import org.zy.moonStone.core.util.buf.MessageBytes;
-import org.zy.moonStone.core.util.http.ActionCode;
-import org.zy.moonStone.core.util.net.SocketWrapperBase;
-import org.zy.moonStone.core.util.net.interfaces.HttpOutputBuffer;
 
 /**
  * @dateTime 2022年7月20日;
@@ -73,7 +73,7 @@ public class Http11OutputBuffer implements HttpOutputBuffer {
     
 	/**
 	 * 根据给定的参数实例化一个 {@code Http11InputBuffer } 对象
-	 * @param request
+	 * @param response
 	 */
 	public Http11OutputBuffer(Response response, int maxHttpHeaderSize) {
 		this.response = response;

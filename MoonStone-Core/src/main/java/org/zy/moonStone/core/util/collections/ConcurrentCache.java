@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.util.collections;
+package org.zy.moonstone.core.util.collections;
 
 import java.util.Map;
 import java.util.WeakHashMap;

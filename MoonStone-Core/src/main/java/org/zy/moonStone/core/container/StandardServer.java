@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.container;
+package org.zy.moonstone.core.container;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,14 +13,14 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import org.zy.moonStone.core.LifecycleBase;
-import org.zy.moonStone.core.LifecycleState;
-import org.zy.moonStone.core.exceptions.LifecycleException;
-import org.zy.moonStone.core.interfaces.container.Server;
-import org.zy.moonStone.core.interfaces.container.Service;
-import org.zy.moonStone.core.startup.Moon;
-import org.zy.moonStone.core.threads.ScheduledThreadPoolExecutorWrapper;
-import org.zy.moonStone.core.threads.TaskThreadFactory;
+import org.zy.moonstone.core.LifecycleBase;
+import org.zy.moonstone.core.LifecycleState;
+import org.zy.moonstone.core.exceptions.LifecycleException;
+import org.zy.moonstone.core.interfaces.container.Server;
+import org.zy.moonstone.core.interfaces.container.Service;
+import org.zy.moonstone.core.startup.Moon;
+import org.zy.moonstone.core.threads.ScheduledThreadPoolExecutorWrapper;
+import org.zy.moonstone.core.threads.TaskThreadFactory;
 
 /**
  * @dateTime 2021年12月31日;
@@ -248,7 +248,7 @@ public final class StandardServer  extends LifecycleBase implements Server{
         	 * threadFactory - 当执行器创建一个新线程时使用的工厂
         	 */
             ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(threads,
-            		new TaskThreadFactory("MoonStone-Utility-", utilityThreadsAsDaemon, Thread.MIN_PRIORITY));
+            		new TaskThreadFactory("moonstone-Utility-", utilityThreadsAsDaemon, Thread.MIN_PRIORITY));
             /*
              * 设置线程在终止之前可以保持空闲的时间限制。
              * 如果池中的线程数超过了当前的核心线程数, 则在等待这段时间而不处理任务后, 多余的线程将被终止。

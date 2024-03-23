@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.webResources;
+package org.zy.moonstone.core.webResources;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,17 +13,17 @@ import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
 import java.util.jar.Manifest;
 
-import org.zy.moonStone.core.exceptions.LifecycleException;
-import org.zy.moonStone.core.interfaces.webResources.WebResource;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceRoot;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceSet;
-import org.zy.moonStone.core.util.buf.UriUtil;
-import org.zy.moonStone.core.util.compat.JreCompat;
+import org.zy.moonstone.core.exceptions.LifecycleException;
+import org.zy.moonstone.core.interfaces.webResources.WebResource;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceRoot;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceSet;
+import org.zy.moonstone.core.util.buf.UriUtil;
+import org.zy.moonstone.core.util.compat.JreCompat;
 
 /**
  * @dateTime 2022年9月1日;
  * @author zy(azurite-Y);
- * @description 表示基于嵌套在打包的WAR文件中的JAR文件的 {@link WebResourceSet } 。这仅供 MoonStone 内部使用，因此不能通过配置创建。
+ * @description 表示基于嵌套在打包的WAR文件中的JAR文件的 {@link WebResourceSet } 。这仅供 moonstone 内部使用，因此不能通过配置创建。
  */
 public class JarWarResourceSet extends AbstractArchiveResourceSet {
 	/** 资源在 war/jar 包下的相对路径，即分隔符之后的路径 */
@@ -82,7 +82,7 @@ public class JarWarResourceSet extends AbstractArchiveResourceSet {
                     jarFileIs = warFile.getInputStream(jarFileInWar);
 
                     // 读取jar 文件项填充 archiveEntries
-                    try (MoonStoneJarInputStream jarIs = new MoonStoneJarInputStream(jarFileIs)) {
+                    try (MoonstoneJarInputStream jarIs = new MoonstoneJarInputStream(jarFileIs)) {
                         JarEntry entry = jarIs.getNextJarEntry();
                         while (entry != null) {
                             archiveEntries.put(entry.getName(), entry);

@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.util;
+package org.zy.moonstone.core.util;
 
 /**
  * @dateTime 2022年5月23日;

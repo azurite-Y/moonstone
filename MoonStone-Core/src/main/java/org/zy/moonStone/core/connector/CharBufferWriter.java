@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.connector;
+package org.zy.moonstone.core.connector;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -165,7 +165,7 @@ public class CharBufferWriter extends PrintWriter {
 
 	/**
 	 * 输出一个浮点数。<code>{@link java.lang.String#valueOf(float) }</code>生成的字符串根据平台的默认字符编码被转换为字节，
-	 * 并且这些字节完全按照 <code>{@link #write(int)方法的方式写入。
+	 * 并且这些字节完全按照 <code>{@link #write(int) 方法的方式写入 } </code>。
 	 */
 	@Override
 	public void print(double d) {

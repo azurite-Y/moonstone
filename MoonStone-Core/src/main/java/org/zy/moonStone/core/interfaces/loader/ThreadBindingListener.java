@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.interfaces.loader;
+package org.zy.moonstone.core.interfaces.loader;
 
 /**
  * @dateTime 2022年9月22日;

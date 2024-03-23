@@ -1,14 +1,14 @@
-package org.zy.moonStone.core;
+package org.zy.moonstone.core;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.exceptions.LifecycleException;
-import org.zy.moonStone.core.interfaces.container.Lifecycle;
-import org.zy.moonStone.core.interfaces.container.LifecycleListener;
-import org.zy.moonStone.core.util.ExceptionUtils;
+import org.zy.moonstone.core.exceptions.LifecycleException;
+import org.zy.moonstone.core.interfaces.container.Lifecycle;
+import org.zy.moonstone.core.interfaces.container.LifecycleListener;
+import org.zy.moonstone.core.util.ExceptionUtils;
 
 /**
  * @dateTime 2021年12月31日;
@@ -259,8 +259,8 @@ public abstract class LifecycleBase implements Lifecycle {
 			}
 
 			if (!(state == LifecycleState.FAILED
-					|| (this.state == LifecycleState.STARTING_PREP  && state == LifecycleState.STARTING) 
-					|| (this.state == LifecycleState.STOPPING_PREP  && state == LifecycleState.STOPPING) 
+					|| (this.state == LifecycleState.STARTING_PREP  && state == LifecycleState.STARTING)
+					|| (this.state == LifecycleState.STOPPING_PREP  && state == LifecycleState.STOPPING)
 					|| (this.state == LifecycleState.FAILED && state == LifecycleState.STOPPING))) {
 				invalidTransition(state.name());
 			}

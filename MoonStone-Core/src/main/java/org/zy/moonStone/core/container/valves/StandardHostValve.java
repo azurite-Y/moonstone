@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.container.valves;
+package org.zy.moonstone.core.container.valves;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -9,15 +9,15 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
-import org.zy.moonStone.core.Globals;
-import org.zy.moonStone.core.connector.HttpRequest;
-import org.zy.moonStone.core.connector.HttpResponse;
-import org.zy.moonStone.core.exceptions.ClientAbortException;
-import org.zy.moonStone.core.interfaces.container.Context;
-import org.zy.moonStone.core.interfaces.container.Wrapper;
-import org.zy.moonStone.core.util.ExceptionUtils;
-import org.zy.moonStone.core.util.descriptor.ErrorPage;
-import org.zy.moonStone.core.util.http.ActionCode;
+import org.zy.moonstone.core.Globals;
+import org.zy.moonstone.core.connector.HttpRequest;
+import org.zy.moonstone.core.connector.HttpResponse;
+import org.zy.moonstone.core.exceptions.ClientAbortException;
+import org.zy.moonstone.core.interfaces.container.Context;
+import org.zy.moonstone.core.interfaces.container.Wrapper;
+import org.zy.moonstone.core.util.ExceptionUtils;
+import org.zy.moonstone.core.util.descriptor.ErrorPage;
+import org.zy.moonstone.core.util.http.ActionCode;
 
 /**
  * @dateTime 2022年1月5日;
@@ -262,7 +262,7 @@ public class StandardHostValve extends ValveBase {
 			RequestDispatcher rd = servletContext.getRequestDispatcher(errorPage.getLocation());
 
 			if (rd == null) {
-				container.getLogger().error("自定义状态失败", errorPage.getLocation());
+				container.getLogger().error("自定义状态失败. by errorPage: {}", errorPage.getLocation());
 				return false;
 			}
 

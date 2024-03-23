@@ -1,5 +1,15 @@
-package org.zy.moonStone.core.http;
+package org.zy.moonstone.core.http;
 
+import org.zy.moonstone.core.Globals;
+import org.zy.moonstone.core.util.buf.MessageBytes;
+import org.zy.moonstone.core.util.http.ActionCode;
+import org.zy.moonstone.core.util.http.ActionHook;
+import org.zy.moonstone.core.util.http.MimeHeaders;
+import org.zy.moonstone.core.util.http.ServerCookies;
+import org.zy.moonstone.core.util.http.parser.HttpParser;
+import org.zy.moonstone.core.util.net.interfaces.InputBuffer;
+
+import javax.servlet.ReadListener;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -8,22 +18,11 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
-import javax.servlet.ReadListener;
-
-import org.zy.moonStone.core.Globals;
-import org.zy.moonStone.core.util.buf.MessageBytes;
-import org.zy.moonStone.core.util.http.ActionCode;
-import org.zy.moonStone.core.util.http.ActionHook;
-import org.zy.moonStone.core.util.http.MimeHeaders;
-import org.zy.moonStone.core.util.http.ServerCookies;
-import org.zy.moonStone.core.util.http.parser.HttpParser;
-import org.zy.moonStone.core.util.net.interfaces.InputBuffer;
-
 /**
  * @dateTime 2022年5月25日;
  * @author zy(azurite-Y);
  * @description 服务器原初请求的低级、高效表示。 大多数字段是无 GC 的，昂贵的操作会延迟到用户代码需要信息。处理委托给模块，使用回调机制。
- * 这个类不用于用户代码 - 它由 MoonStone 内部使用，用于以最有效的方式处理请求 方法。 用户（servlet）可以使用外观访问信息，该外观提供请求的高级视图。
+ * 这个类不用于用户代码 - 它由 moonstone 内部使用，用于以最有效的方式处理请求 方法。 用户（servlet）可以使用外观访问信息，该外观提供请求的高级视图。
  */
 public final class Request {
 	/** 每个请求的预期最大 cookie 数 */

@@ -1,6 +1,6 @@
-package org.zy.moonStone.core;
+package org.zy.moonstone.core;
 
-import org.zy.moonStone.core.interfaces.container.Lifecycle;
+import org.zy.moonstone.core.interfaces.container.Lifecycle;
 
 /**
  * @dateTime 2021年12月29日;

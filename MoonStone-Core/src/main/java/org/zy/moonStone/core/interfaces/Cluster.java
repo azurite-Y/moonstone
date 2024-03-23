@@ -1,7 +1,7 @@
-package org.zy.moonStone.core.interfaces;
+package org.zy.moonstone.core.interfaces;
 
-import org.zy.moonStone.core.interfaces.container.Contained;
-import org.zy.moonStone.core.session.interfaces.Manager;
+import org.zy.moonstone.core.interfaces.container.Contained;
+import org.zy.moonstone.core.session.interfaces.Manager;
 
 /**
  * @dateTime 2021年12月29日;

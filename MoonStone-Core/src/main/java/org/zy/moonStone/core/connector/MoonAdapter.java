@@ -1,30 +1,29 @@
-package org.zy.moonStone.core.connector;
+package org.zy.moonstone.core.connector;
 
-import java.io.IOException;
-import java.net.URLDecoder;
-import java.util.EnumSet;
-import java.util.concurrent.atomic.AtomicBoolean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.zy.moonstone.core.http.Request;
+import org.zy.moonstone.core.http.Response;
+import org.zy.moonstone.core.interfaces.connector.Adapter;
+import org.zy.moonstone.core.interfaces.container.Context;
+import org.zy.moonstone.core.interfaces.container.Wrapper;
+import org.zy.moonstone.core.session.SessionConfig;
+import org.zy.moonstone.core.util.buf.CharChunk;
+import org.zy.moonstone.core.util.buf.MessageBytes;
+import org.zy.moonstone.core.util.http.ActionCode;
+import org.zy.moonstone.core.util.http.ServerCookie;
+import org.zy.moonstone.core.util.http.ServerCookies;
+import org.zy.moonstone.core.util.net.SocketEvent;
+import org.zy.moonstone.core.util.net.interfaces.SSLSupport;
 
 import javax.servlet.ReadListener;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.SessionTrackingMode;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.zy.moonStone.core.http.Request;
-import org.zy.moonStone.core.http.Response;
-import org.zy.moonStone.core.interfaces.connector.Adapter;
-import org.zy.moonStone.core.interfaces.container.Context;
-import org.zy.moonStone.core.interfaces.container.Wrapper;
-import org.zy.moonStone.core.session.SessionConfig;
-import org.zy.moonStone.core.util.buf.CharChunk;
-import org.zy.moonStone.core.util.buf.MessageBytes;
-import org.zy.moonStone.core.util.http.ActionCode;
-import org.zy.moonStone.core.util.http.ServerCookie;
-import org.zy.moonStone.core.util.http.ServerCookies;
-import org.zy.moonStone.core.util.net.SocketEvent;
-import org.zy.moonStone.core.util.net.interfaces.SSLSupport;
+import java.io.IOException;
+import java.net.URLDecoder;
+import java.util.EnumSet;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * @dateTime 2022年6月16日;
@@ -467,8 +466,8 @@ public class MoonAdapter implements Adapter {
     /**
      * 从请求中提取路径参数。 这假定参数的形式是 /path;name=value;name2=value2/ 等。目前只对将采用这种形式的会话 ID 真正感兴趣。 可以安全地忽略其他参数。
      *
-     * @param req - 原初请求对象
-     * @param request - 连接器请求对象
+     * @param request - 原初请求对象
+     * @param httpRequest - 连接器请求对象
      */
     protected void parsePathParameters(Request request, HttpRequest httpRequest) {
     	CharChunk decodedURI = request.decodedURI().getCharChunk();
@@ -518,7 +517,7 @@ public class MoonAdapter implements Adapter {
     /**
      * 解析 Cookie 中的会话 ID
      *
-     * @param request Servlet 请求对象
+     * @param httpRequest Servlet 请求对象
      */
 	protected void parseSessionCookiesId(HttpRequest httpRequest) {
 		/**
@@ -561,7 +560,7 @@ public class MoonAdapter implements Adapter {
 	/**
      * 如果需要，查找SSL会话ID。仅在启用了唯一的跟踪方法时才查找SSL会话ID。
      *
-     * @param request - Servlet请求对象
+     * @param httpRequest - Servlet请求对象
      */
     protected void parseSessionSslId(HttpRequest httpRequest) {
         if (httpRequest.getRequestedSessionId() == null // 无法从路径参数和cookie中都没有解析到会话ID则为 null

@@ -1,11 +1,7 @@
-package org.zy.moonStone.core.util;
+package org.zy.moonstone.core.util;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @dateTime 2022年5月11日;

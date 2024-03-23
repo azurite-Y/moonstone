@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.util.buf;
+package org.zy.moonstone.core.util.buf;
 
 import java.io.IOException;
 
@@ -169,7 +169,7 @@ public class CharChunk extends AbstractChunk implements CharSequence {
 
 	/**
 	 * 添加字符串到缓冲区
-	 * @param src - 字符串
+	 * @param s - 字符串
 	 * @param off - 偏移量
 	 * @param len - 字符串长度
 	 * @throws IOException - 向输出通道写入溢出数据失败

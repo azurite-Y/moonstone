@@ -1,10 +1,10 @@
-package org.zy.moonStone.core.interfaces.webResources;
+package org.zy.moonstone.core.interfaces.webResources;
 
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Set;
 
-import org.zy.moonStone.core.interfaces.container.Lifecycle;
+import org.zy.moonstone.core.interfaces.container.Lifecycle;
 
 /**
  * @dateTime 2022年4月12日;

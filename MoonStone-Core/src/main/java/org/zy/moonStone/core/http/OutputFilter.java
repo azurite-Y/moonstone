@@ -1,6 +1,6 @@
-package org.zy.moonStone.core.http;
+package org.zy.moonstone.core.http;
 
-import org.zy.moonStone.core.util.net.interfaces.HttpOutputBuffer;
+import org.zy.moonstone.core.util.net.interfaces.HttpOutputBuffer;
 
 /**
  * @dateTime 2022年12月5日;
@@ -25,7 +25,7 @@ public interface OutputFilter extends HttpOutputBuffer {
     /**
      * 设置过滤器管道中的下一个缓冲区
      *
-     * @param httpOutputBuffer - 下一个缓冲区实例
+     * @param buffer - 下一个缓冲区实例
      */
     public void setHttpOutputBuffer(HttpOutputBuffer buffer);
 }

@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.mapper;
+package org.zy.moonstone.core.mapper;
 
 import javax.servlet.http.HttpServletMapping;
 import javax.servlet.http.MappingMatch;
@@ -81,9 +81,9 @@ public class ApplicationMapping {
         }
 
         /**
-         * 返回导致此请求匹配的 URI 路径部分。 如果 {@link getMappingMatch} 值为 {@code CONTEXT_ROOT } 或 {@code DEFAULT }，则此方法必须返回空字符串。
-         * 如果 {@link getMappingMatch} 值为 {@code EXACT }，则此方法必须返回与 servlet 匹配的路径部分，省略任何前导斜杠。 
-         * 如果 {@link getMappingMatch} 值为 {@code EXTENSION } 或 {@code PATH }，则此方法必须返回与“*”匹配的值
+         * 返回导致此请求匹配的 URI 路径部分。 如果 {@link #getMappingMatch} 值为 {@code CONTEXT_ROOT } 或 {@code DEFAULT }，则此方法必须返回空字符串。
+         * 如果 {@link #getMappingMatch} 值为 {@code EXACT }，则此方法必须返回与 servlet 匹配的路径部分，省略任何前导斜杠。
+         * 如果 {@link #getMappingMatch} 值为 {@code EXTENSION } 或 {@code PATH }，则此方法必须返回与“*”匹配的值
          */
         @Override
         public String getMatchValue() {
@@ -91,8 +91,8 @@ public class ApplicationMapping {
         }
 
         /**
-         * 返回这个映射的url模式的String表示。如果 {@link getMappingMatch} 的值是 {@code CONTEXT_ROOT }或 {@code DEFAULT }，这个方法必须返回空字符串。
-         * 如果 {@link getMappingMatch} 值是 {@code EXTENSION }，这个方法必须返回不带前导斜杠的模式。
+         * 返回这个映射的url模式的String表示。如果 {@link #getMappingMatch} 的值是 {@code CONTEXT_ROOT }或 {@code DEFAULT }，这个方法必须返回空字符串。
+         * 如果 {@link #getMappingMatch} 值是 {@code EXTENSION }，这个方法必须返回不带前导斜杠的模式。
          * 否则，该方法将返回与描述符或Java配置中指定的模式完全相同的模式。
          * @return 这个映射的url模式的String表示
          */

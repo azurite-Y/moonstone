@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.webResources;
+package org.zy.moonstone.core.webResources;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,11 +9,11 @@ import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.zy.moonStone.core.exceptions.LifecycleException;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceRoot;
-import org.zy.moonStone.core.interfaces.webResources.WebResourceSet;
-import org.zy.moonStone.core.util.buf.UriUtil;
-import org.zy.moonStone.core.util.compat.JreCompat;
+import org.zy.moonstone.core.exceptions.LifecycleException;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceRoot;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceSet;
+import org.zy.moonstone.core.util.buf.UriUtil;
+import org.zy.moonstone.core.util.compat.JreCompat;
 
 /**
  * @dateTime 2022年9月1日;

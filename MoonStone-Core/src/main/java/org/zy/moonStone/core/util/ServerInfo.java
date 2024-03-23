@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.util;
+package org.zy.moonstone.core.util;
 
 import java.io.InputStream;
 import java.util.Properties;
@@ -25,7 +25,7 @@ public class ServerInfo {
         String number = null;
 
         Properties props = new Properties();
-    	try ( InputStream is = ClassLoader.getSystemResourceAsStream("org/zy/moonStone/core/util/ServerInfo.properties") ) {
+    	try ( InputStream is = ClassLoader.getSystemResourceAsStream("org/zy/moonstone/core/util/ServerInfo.properties") ) {
             props.load(is);
             info = props.getProperty("server.info");
             number = props.getProperty("server.number");

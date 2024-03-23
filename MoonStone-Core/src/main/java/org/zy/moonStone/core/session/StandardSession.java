@@ -1,49 +1,26 @@
-package org.zy.moonStone.core.session;
+package org.zy.moonstone.core.session;
 
+import org.zy.moonstone.core.Globals;
+import org.zy.moonstone.core.interfaces.container.ContainerListener;
+import org.zy.moonstone.core.interfaces.container.Context;
+import org.zy.moonstone.core.security.SecurityUtil;
+import org.zy.moonstone.core.session.interfaces.Manager;
+import org.zy.moonstone.core.session.interfaces.Session;
+import org.zy.moonstone.core.session.interfaces.SessionEvent;
+import org.zy.moonstone.core.session.interfaces.SessionListener;
+import org.zy.moonstone.core.util.ExceptionUtils;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.*;
 import java.beans.PropertyChangeSupport;
-import java.io.IOException;
-import java.io.NotSerializableException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.ObjectStreamException;
-import java.io.Serializable;
-import java.io.WriteAbortedException;
+import java.io.*;
 import java.security.AccessController;
 import java.security.Principal;
 import java.security.PrivilegedAction;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionActivationListener;
-import javax.servlet.http.HttpSessionAttributeListener;
-import javax.servlet.http.HttpSessionBindingEvent;
-import javax.servlet.http.HttpSessionBindingListener;
-import javax.servlet.http.HttpSessionContext;
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionIdListener;
-import javax.servlet.http.HttpSessionListener;
-
-import org.zy.moonStone.core.Globals;
-import org.zy.moonStone.core.interfaces.container.ContainerListener;
-import org.zy.moonStone.core.interfaces.container.Context;
-import org.zy.moonStone.core.security.SecurityUtil;
-import org.zy.moonStone.core.session.interfaces.Manager;
-import org.zy.moonStone.core.session.interfaces.Session;
-import org.zy.moonStone.core.session.interfaces.SessionEvent;
-import org.zy.moonStone.core.session.interfaces.SessionListener;
-import org.zy.moonStone.core.util.ExceptionUtils;
 
 /**
  * @dateTime 2022年8月10日;
@@ -52,7 +29,7 @@ import org.zy.moonStone.core.util.ExceptionUtils;
  *              <p>
  *              注意:这个类的实例代表了会话的内部(Session)和应用层(HttpSession)视图。
  *              但是，因为类本身没有声明为公共的，所以
- *              <code>org.zy.moonStone.core.session </code>包外的Java逻辑不能将这个实例的httpsession视图转换回Session视图。
+ *              <code>org.zy.moonstone.core.session </code>包外的Java逻辑不能将这个实例的httpsession视图转换回Session视图。
  *              <p>
  *              注意:如果你向这个类添加字段，你必须确保你在读/写对象方法中携带它们，这样这个类才会被正确序列化。
  */
@@ -69,14 +46,14 @@ public class StandardSession implements HttpSession, Session, Serializable {
 	static {
 		STRICT_SERVLET_COMPLIANCE = Globals.STRICT_SERVLET_COMPLIANCE;
 
-		String activityCheck = System.getProperty("org.zy.moonStone.core.session.StandardSession.ACTIVITY_CHECK");
+		String activityCheck = System.getProperty("org.zy.moonstone.core.session.StandardSession.ACTIVITY_CHECK");
 		if (activityCheck == null) {
 			ACTIVITY_CHECK = STRICT_SERVLET_COMPLIANCE;
 		} else {
 			ACTIVITY_CHECK = Boolean.parseBoolean(activityCheck);
 		}
 
-		String lastAccessAtStart = System.getProperty("org.zy.moonStone.core.session.StandardSession.LAST_ACCESS_AT_START");
+		String lastAccessAtStart = System.getProperty("org.zy.moonstone.core.session.StandardSession.LAST_ACCESS_AT_START");
 		if (lastAccessAtStart == null) {
 			LAST_ACCESS_AT_START = STRICT_SERVLET_COMPLIANCE;
 		} else {

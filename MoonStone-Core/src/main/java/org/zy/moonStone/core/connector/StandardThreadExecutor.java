@@ -1,17 +1,17 @@
-package org.zy.moonStone.core.connector;
+package org.zy.moonstone.core.connector;
 
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
-import org.zy.moonStone.core.Constants;
-import org.zy.moonStone.core.LifecycleBase;
-import org.zy.moonStone.core.LifecycleState;
-import org.zy.moonStone.core.exceptions.LifecycleException;
-import org.zy.moonStone.core.interfaces.connector.Executor;
-import org.zy.moonStone.core.interfaces.connector.ResizableExecutor;
-import org.zy.moonStone.core.threads.TaskQueue;
-import org.zy.moonStone.core.threads.TaskThreadFactory;
-import org.zy.moonStone.core.threads.ThreadPoolExecutor;
+import org.zy.moonstone.core.Constants;
+import org.zy.moonstone.core.LifecycleBase;
+import org.zy.moonstone.core.LifecycleState;
+import org.zy.moonstone.core.exceptions.LifecycleException;
+import org.zy.moonstone.core.interfaces.connector.Executor;
+import org.zy.moonstone.core.interfaces.connector.ResizableExecutor;
+import org.zy.moonstone.core.threads.TaskQueue;
+import org.zy.moonstone.core.threads.TaskThreadFactory;
+import org.zy.moonstone.core.threads.ThreadPoolExecutor;
 
 /**
  * @dateTime 2022年12月6日;
@@ -91,7 +91,7 @@ public class StandardThreadExecutor extends LifecycleBase implements Executor, R
 
     /**
      * Start the component and implement the requirements
-     * of {@link org.apache.catalina.util.LifecycleBase#startInternal()}.
+     * of {@link LifecycleBase#startInternal()}.
      *
      * @exception LifecycleException if this component detects a fatal error
      *  that prevents this component from being used
@@ -114,7 +114,7 @@ public class StandardThreadExecutor extends LifecycleBase implements Executor, R
 
     /**
      * Stop the component and implement the requirements
-     * of {@link org.apache.catalina.util.LifecycleBase#stopInternal()}.
+     * of {@link LifecycleBase#stopInternal()}.
      *
      * @exception LifecycleException if this component detects a fatal error
      *  that needs to be reported

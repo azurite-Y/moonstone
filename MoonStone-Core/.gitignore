@@ -1,6 +1,6 @@
 /target/
-/MoonStone-Core.iml
-/.idea/
-/.classpath/
 /.settings/
-/.project/
+/.classpath
+# 方便导入 Eclipse
+#/.project
+/moonstone-core.iml

@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.interfaces.connector;
+package org.zy.moonstone.core.interfaces.connector;
 
 import java.util.concurrent.Executor;
 

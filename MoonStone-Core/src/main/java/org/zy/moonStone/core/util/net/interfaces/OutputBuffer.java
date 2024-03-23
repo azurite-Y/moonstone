@@ -1,4 +1,4 @@
-package org.zy.moonStone.core.util.net.interfaces;
+package org.zy.moonstone.core.util.net.interfaces;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

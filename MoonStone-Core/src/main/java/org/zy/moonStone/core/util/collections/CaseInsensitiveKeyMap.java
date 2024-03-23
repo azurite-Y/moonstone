@@ -1,12 +1,6 @@
-package org.zy.moonStone.core.util.collections;
+package org.zy.moonstone.core.util.collections;
 
-import java.util.AbstractMap;
-import java.util.AbstractSet;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @dateTime 2022年11月24日;

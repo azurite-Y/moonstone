@@ -1,16 +1,15 @@
-package org.zy.moonStone.core.session.interfaces;
+package org.zy.moonstone.core.session.interfaces;
 
-import java.security.Principal;
-import java.util.Iterator;
+import org.zy.moonstone.core.interfaces.container.ContainerListener;
 
 import javax.servlet.http.HttpSession;
-
-import org.zy.moonStone.core.interfaces.container.ContainerListener;
+import java.security.Principal;
+import java.util.Iterator;
 
 /**
  * @dateTime 2021年12月30日;
  * @author zy(azurite-Y);
- * @description Session是 HttpSession 的 moonStone 内部镜像，用于维护web应用程序中特定用户请求之间的状态信息
+ * @description Session是 HttpSession 的 moonstone 内部镜像，用于维护web应用程序中特定用户请求之间的状态信息
  */
 public interface Session {
     // ----------------------------------------------------- 常量 -----------------------------------------------------

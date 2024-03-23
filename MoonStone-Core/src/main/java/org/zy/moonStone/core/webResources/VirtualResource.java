@@ -1,6 +1,6 @@
-package org.zy.moonStone.core.webResources;
+package org.zy.moonstone.core.webResources;
 
-import org.zy.moonStone.core.interfaces.webResources.WebResourceRoot;
+import org.zy.moonstone.core.interfaces.webResources.WebResourceRoot;
 
 /**
  * @dateTime 2022年8月31日;

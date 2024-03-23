@@ -1,20 +1,20 @@
-package org.zy.moonStone.core.connector;
+package org.zy.moonstone.core.connector;
+
+import org.zy.moonstone.core.Globals;
+import org.zy.moonstone.core.LifecycleBase;
+import org.zy.moonstone.core.LifecycleState;
+import org.zy.moonstone.core.exceptions.LifecycleException;
+import org.zy.moonstone.core.http.AbstractHttp11Protocol;
+import org.zy.moonstone.core.http.AbstractProtocol;
+import org.zy.moonstone.core.interfaces.connector.Adapter;
+import org.zy.moonstone.core.interfaces.connector.ProtocolHandler;
+import org.zy.moonstone.core.interfaces.connector.UpgradeProtocol;
+import org.zy.moonstone.core.interfaces.container.Service;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashSet;
-
-import org.zy.moonStone.core.Globals;
-import org.zy.moonStone.core.LifecycleBase;
-import org.zy.moonStone.core.LifecycleState;
-import org.zy.moonStone.core.exceptions.LifecycleException;
-import org.zy.moonStone.core.http.AbstractHttp11Protocol;
-import org.zy.moonStone.core.http.AbstractProtocol;
-import org.zy.moonStone.core.interfaces.connector.Adapter;
-import org.zy.moonStone.core.interfaces.connector.ProtocolHandler;
-import org.zy.moonStone.core.interfaces.connector.UpgradeProtocol;
-import org.zy.moonStone.core.interfaces.container.Service;
 
 /**
  * @dateTime 2022年1月7日;
@@ -144,12 +144,12 @@ public class Connector extends LifecycleBase {
 	 * 默认使用 HTTP/1.1 NIO 实现
 	 */
 	public Connector() {
-		this("org.zy.moonStone.core.http11.Http11NioProtocol");
+		this("org.zy.moonstone.core.http11.Http11NioProtocol");
 	}
 
 	public Connector(String protocol) {
 		if ("HTTP/1.1".equals(protocol) || protocol == null) {
-			protocolHandlerClassName = "org.zy.moonStone.core.http.Http11NioProtocol";
+			protocolHandlerClassName = "org.zy.moonstone.core.http.Http11NioProtocol";
 		} else {
 			protocolHandlerClassName = protocol;
 		}
@@ -367,7 +367,7 @@ public class Connector extends LifecycleBase {
 	 * @return 使用的协议处理程序
 	 */
 	public String getProtocol() {
-		return "org.zy.moonStone.core.http.Http11NioProtocol".equals(getProtocolHandlerClassName()) ? "HTTP/1.1" : getProtocolHandlerClassName();
+		return "org.zy.moonstone.core.http.Http11NioProtocol".equals(getProtocolHandlerClassName()) ? "HTTP/1.1" : getProtocolHandlerClassName();
 	}
 
 	/**
@@ -541,8 +541,8 @@ public class Connector extends LifecycleBase {
 
 	public String getExecutorName() {
 		java.util.concurrent.Executor obj = protocolHandler.getExecutor();
-		if (obj instanceof org.zy.moonStone.core.interfaces.connector.Executor) {
-			return ((org.zy.moonStone.core.interfaces.connector.Executor) obj).getName();
+		if (obj instanceof org.zy.moonstone.core.interfaces.connector.Executor) {
+			return ((org.zy.moonstone.core.interfaces.connector.Executor) obj).getName();
 		}
 		return INTERNAL_EXECUTOR_NAME;
 	}
