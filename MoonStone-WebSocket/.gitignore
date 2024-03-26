@@ -1,6 +1,0 @@
-/target/
-/.settings/
-/.classpath
-# 方便导入 Eclipse
-#/.project
-/moonstone-websocket.iml
